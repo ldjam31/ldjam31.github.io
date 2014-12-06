@@ -28,8 +28,7 @@
     game.Module.define('module_radar')
         .data({
             range: 0,
-            maxRange: 150,
-            rangeInc: 0.
+            maxRange: 100,
         })
         .onUpdate(function (e, screen) {
             var player, obstacles, nodeObstacle, distX, distY,
@@ -64,7 +63,6 @@
                         parameters.x = distX * cosRotation - distY * sinRotation + playerXCenter;
                         parameters.y = distX * sinRotation + distY * cosRotation + playerYCenter;
                         radarScreen.addChild('entity_pointOnRadar', parameters);
-                        console.log(parameters.x,parameters.y);
                     }
                     nodeObstacle = nodeObstacle.next;
                 }

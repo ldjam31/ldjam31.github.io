@@ -25,6 +25,7 @@
 !(function () {
     game.Entity.define('entity_hud')
         .sprite('sprite_hud')
+        .updateAnyways()
         .onCreate(function () {
             this.id = 'hud';
         })

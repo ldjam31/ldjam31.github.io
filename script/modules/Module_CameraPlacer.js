@@ -24,12 +24,15 @@
 
 !(function () {
     var centerOnPlayer = function (player, s, game) {
-        game.camera.x = player.xCenter - 400;
-        game.camera.y = player.yCenter - 300;
+        game.camera.x = Cassava.fixedFloat(player.xCenter - 400);
+        game.camera.y = Cassava.fixedFloat(player.yCenter - 300);
     }
 
     var placeRadarScreen = function (radarScreen, s, g) {
         var nodePoint = radarScreen.firstChildNode;
+        
+        radarScreen.x = Cassava.fixedFloat(game.camera.x - 20);
+        radarScreen.y = Cassava.fixedFloat(game.camera.y - 20);
         
         while (nodePoint) {
             nodePoint.o.x = nodePoint.o.sprite.x + game.camera.x;
@@ -40,8 +43,8 @@
     }
     
     var placeHud = function (hud, s, game) {
-        hud.x = game.camera.x;
-        hud.y = game.camera.y;
+        hud.x = Cassava.fixedFloat(game.camera.x - 20);
+        hud.y = Cassava.fixedFloat(game.camera.y - 20);
     }
     
     game.Module.define('module_cameraPlacer')

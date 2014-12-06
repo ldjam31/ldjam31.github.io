@@ -24,7 +24,8 @@
 
 !(function () {
     var assets = [
-        {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/hud.png'},
+        {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/Board.png'},
+        {type: Cassava.Assets.IMAGE, name: 'glass', src: './assets/img/Glass.png'},
         {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/point.png'}
     ];
 

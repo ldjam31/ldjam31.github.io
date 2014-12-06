@@ -93,7 +93,7 @@
         this.acceleration = 0;
         this.rotationAcceleration = 0;
         
-        document.getElementById('debug').innerHTML = entity.x + ',' + entity.y + ',' + this.rotation;
+//        document.getElementById('debug').innerHTML = entity.x + ',' + entity.y + ',' + this.rotation;
     }
 
     function initPhysics(args) {

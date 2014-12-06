@@ -23,12 +23,6 @@
  */
 
 (function ( ) {
-    game.Entity.define('entity_radarScreen')
-        .sprite('sprite_glass')
-        .updateAnyways()
-        
-        .onCreate(function () {
-            this.id = 'radarScreen';
-            this.z = 2;
-        })
+    game.Sprite.define('sprite_glass')
+        .asset('glass');
 })()
