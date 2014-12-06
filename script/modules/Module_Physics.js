@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-var game;
-
-(function () {
-    game = new Cassava.Game('game', 'canvas', 800, 600, 1);
-    game.background('#FFFFFF');
+(function ( ) {
+    game.Module.define('module_physics')
+        .data({
+        });
 })()

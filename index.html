@@ -9,22 +9,32 @@
     <body>
         <h1>JEU KI TU</h1>
         <canvas id="game"></canvas>
-		<div id="footer">
-			Created for #LDJAM by Ben &amp; Nuts.
-		</div>
-        
+        <div id="footer">
+            Created for #LDJAM by Ben &amp; Nuts.
+        </div>
+
         <!--DEV-->
-        <!--<script src="lib/Cassava.js"></script>-->
-        
+        <script src="lib/Cassava.js"></script>
+
         <!--PROD-->
-        <script src="lib/Cassava.min.js"></script>
-    
+        <!--<script src="lib/Cassava.min.js"></script>-->
+
         <script src="script/Init.js"></script>
+
+        <!--        <script src="script/entities/Entity_Doge.js"></script>
+                <script src="script/modules/Module_DogeUpdater.js"></script>
+                <script src="script/screens/Screen_Demo.js"></script>
+                <script src="script/sprites/Sprite_Doge.js"></script>-->
+
+        <script src="script/entities/Entity_Player.js"></script>
+        <script src="script/entities/Entity_Hud.js"></script>
         
-        <script src="script/entities/Entity_Doge.js"></script>
-        <script src="script/modules/Module_DogeUpdater.js"></script>
-        <script src="script/screens/Screen_Demo.js"></script>
-        <script src="script/sprites/Sprite_Doge.js"></script>
+        <script src="script/modules/Module_Physics.js"></script>
+        <script src="script/modules/Module_CameraPlacer.js"></script>
+        
+        <script src="script/screens/Screen_Game.js"></script>
+        
+        <script src="script/sprites/Sprite_Hud.js"></script>
         
         <script src="script/Start.js"></script>
     </body>

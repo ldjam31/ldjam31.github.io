@@ -24,9 +24,11 @@
 
 !(function () {
     var assets = [
-        {type: Cassava.Assets.IMAGE, name: 'doge', src: './assets/img/doge.png'}
+//        {type: Cassava.Assets.IMAGE, name: 'doge', src: './assets/img/doge.png'}
+        {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/hud.png'}
     ];
 
     game.assets(assets)
-        .startAtScreen('screen_demo');
+        .background('#007224')
+        .startAtScreen('screen_game');
 })()

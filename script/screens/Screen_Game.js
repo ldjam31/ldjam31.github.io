@@ -22,9 +22,19 @@
  * SOFTWARE.
  */
 
-var game;
-
-(function () {
-    game = new Cassava.Game('game', 'canvas', 800, 600, 1);
-    game.background('#FFFFFF');
+(function ( ) {
+    game.Screen.define('screen_game')
+        .entities([
+            {type: 'entity_hud'},
+            {
+                type: 'entity_player', 
+                data: {
+                    x: 64,
+                    y: 32
+                }
+            }
+        ])
+        .postEventModules([
+            'module_cameraPlacer'
+        ]);
 })()

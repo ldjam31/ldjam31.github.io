@@ -22,9 +22,17 @@
  * SOFTWARE.
  */
 
-var game;
-
-(function () {
-    game = new Cassava.Game('game', 'canvas', 800, 600, 1);
-    game.background('#FFFFFF');
+(function ( ) {
+    var initialX = 100;
+    var initialY = 100;
+    
+    game.Entity.define('entity_player')
+        .modules([
+            'module_physics'
+        ])
+        .onCreate(function() {
+            this.id = 'player';
+            this.x = initialX;
+            this.y = initialY;
+        })
 })()

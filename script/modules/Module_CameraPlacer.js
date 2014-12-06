@@ -22,9 +22,21 @@
  * SOFTWARE.
  */
 
-var game;
-
-(function () {
-    game = new Cassava.Game('game', 'canvas', 800, 600, 1);
-    game.background('#FFFFFF');
+!(function () {
+    var centerOnPlayer = function (player, s, game) {
+        game.camera.x = player.xCenter - 400;
+        game.camera.y = player.yCenter - 300;
+    }
+    
+    var placeHud = function (hud, s, game) {
+        hud.x = game.camera.x;
+        hud.y = game.camera.y;
+    }
+    
+    game.Module.define('module_cameraPlacer')
+        .data({})
+        .onUpdate(function (e, screen) {
+            screen.ifEntity('entity_player', 'player', centerOnPlayer);
+            screen.ifEntity('entity_hud', 'hud', placeHud);
+        })
 })()

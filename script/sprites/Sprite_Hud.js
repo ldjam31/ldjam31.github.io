@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 
-var game;
-
-(function () {
-    game = new Cassava.Game('game', 'canvas', 800, 600, 1);
-    game.background('#FFFFFF');
+!(function () {
+    game.Sprite.define('sprite_hud')
+        .asset('hud');
 })()
