@@ -27,6 +27,10 @@
     var fuelConsumptionForRotationAcceleration = 0.01;
 
     game.Entity.define('entity_player')
+        .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
+            width: 8,
+            height: 14
+        })
         .modules([
             {
                 type: 'module_physics',

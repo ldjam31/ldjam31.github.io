@@ -56,7 +56,8 @@
                 type: 'entity_obstacles',
                 data: initialEnemies
             },
-            {type: 'entity_radarScreen'}
+            {type: 'entity_radarScreen'},
+            {type: 'entity_shattering'}
         ])
         .postEventModules([
             'module_radar',

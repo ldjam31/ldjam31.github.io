@@ -29,4 +29,8 @@
             this.x = args.x;
             this.y = args.y;
         })
+        .whenHitsEntities(['entity_player'], function (player, screen, game) {
+            game.state.armor -= player.module('module_physics').speed * 20;
+            screen.removeEntity(this);
+        })
 })()

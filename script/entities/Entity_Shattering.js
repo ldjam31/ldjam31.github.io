@@ -23,41 +23,36 @@
  */
 
 (function ( ) {
-    game.Module.define('module_pointUpdater')
-        .data({
-            initialTTL: 90,
-            ttl: 90
-        })
-        .onUpdate(function (entity, screen) {
-            if (this.ttl <= 0) {
-                screen.removeEntity(entity);
+    game.Module.define('module_shatteringUpdater')
+        .onUpdate(function (entity, s, game) {
+            if (game.state.armor / game.state.maxArmor < 0.20) {
+                entity.sprite.isVisible = true;
+                entity.sprite.frame = 3;
+            } else if (game.state.armor / game.state.maxArmor < 0.40) {
+                entity.sprite.isVisible = true;
+                entity.sprite.frame = 2;
+            } else if (game.state.armor / game.state.maxArmor < 0.60) {
+                entity.sprite.isVisible = true;
+                entity.sprite.frame = 1;
+            } else if (game.state.armor / game.state.maxArmor < 0.80) {
+                entity.sprite.isVisible = true;
+                entity.sprite.frame = 0;
             } else {
-                entity.sprite.alpha = this.ttl / this.initialTTL;
-                this.ttl--;
+                entity.sprite.isVisible = false;
             }
         })
-
-    game.Entity.define('entity_pointOnRadar')
+    
+    game.Entity.define('entity_shattering')
+        .sprite('sprite_shattering')
         .modules([
-            'module_pointUpdater'
+            'module_shatteringUpdater'
         ])
-        .spriteDelta(-10, -10)
-        .sprite('sprite_pointOnRadar')
-        .onCreate(function (args) {
+        .onCreate(function () {
+            this.z = 3;
+            this.id = 'shattering';
             this.sprite.stop();
-            switch (args.type) {
-                case 'bonus':
-                    this.sprite.frame = 0;
-                    break;
-                default:
-                case 'enemy':
-                    this.sprite.frame = 1;
-                    break;
-
-            }
-            this.x = args.x;
-            this.y = args.y;
+            this.sprite.isVisible = false;
+            this.x = 230;
+            this.y = 130;
         })
 })()
-
-

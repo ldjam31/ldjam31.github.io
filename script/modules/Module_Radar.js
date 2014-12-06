@@ -60,6 +60,7 @@
                     dist = Math.sqrt(distX * distX + distY * distY);
 
                     if (~~dist === this.range) {
+                        parameters.type = 'enemy';
                         parameters.x = distX * cosRotation - distY * sinRotation + 400;
                         parameters.y = distX * sinRotation + distY * cosRotation + 300;
                         radarScreen.addChild('entity_pointOnRadar', parameters);

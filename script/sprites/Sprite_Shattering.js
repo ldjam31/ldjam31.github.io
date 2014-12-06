@@ -23,7 +23,7 @@
  */
 
 (function ( ) {
-    game.Sprite.define('sprite_pointOnRadar')
-        .dimensions(20,20)
-        .asset('pointOnRadar');
+    game.Sprite.define('sprite_shattering')
+        .dimensions(340,340)
+        .asset('shattering');
 })()
