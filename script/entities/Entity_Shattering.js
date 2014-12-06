@@ -25,16 +25,16 @@
 (function ( ) {
     game.Module.define('module_shatteringUpdater')
         .onUpdate(function (entity, s, game) {
-            if (game.state.armor / game.state.maxArmor < 0.20) {
+            if (game.state.armor / game.state.armorMax < 0.20) {
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 3;
-            } else if (game.state.armor / game.state.maxArmor < 0.40) {
+            } else if (game.state.armor / game.state.armorMax < 0.40) {
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 2;
-            } else if (game.state.armor / game.state.maxArmor < 0.60) {
+            } else if (game.state.armor / game.state.armorMax < 0.60) {
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 1;
-            } else if (game.state.armor / game.state.maxArmor < 0.80) {
+            } else if (game.state.armor / game.state.armorMax < 0.80) {
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 0;
             } else {

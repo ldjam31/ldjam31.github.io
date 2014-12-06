@@ -40,6 +40,8 @@
         {type: 'entity_mine', data: {x: 40, y: 0}},
         {type: 'entity_mine', data: {x: 20, y: 0}},
         {type: 'entity_mine', data: {x: 0, y: 0}},
+        {type: 'entity_bonus', data: {x: 100, y: 100, type:'fuel', value: '10'}},
+        {type: 'entity_bonus', data: {x: 200, y: 200, type:'armor', value: '10'}},
     ]
     
     game.Screen.define('screen_game')
@@ -53,7 +55,7 @@
                 }
             },
             {
-                type: 'entity_obstacles',
+                type: 'entity_map',
                 data: initialEnemies
             },
             {type: 'entity_radarScreen'},

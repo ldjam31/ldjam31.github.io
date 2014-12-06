@@ -41,19 +41,30 @@
         .modules([
             'module_pointUpdater'
         ])
-        .spriteDelta(-10, -10)
+        .spriteDelta(-15, -15)
         .sprite('sprite_pointOnRadar')
         .onCreate(function (args) {
             this.sprite.stop();
             switch (args.type) {
-                case 'bonus':
-                    this.sprite.frame = 0;
-                    break;
                 default:
-                case 'enemy':
-                    this.sprite.frame = 1;
+                case 'mine':
+                    this.sprite.frame = 4;
                     break;
-
+                case 'rock':
+                    this.sprite.frame = 5;
+                    break;
+                case 'upgrade':
+                    this.sprite.frame = 6;
+                    break;
+                case 'armor':
+                    this.sprite.frame = 7;
+                    break;
+                case 'ammos':
+                    this.sprite.frame = 8;
+                    break;
+                case 'fuel':
+                    this.sprite.frame = 9;
+                    break;
             }
             this.x = args.x;
             this.y = args.y;

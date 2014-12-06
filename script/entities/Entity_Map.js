@@ -23,7 +23,16 @@
  */
 
 (function ( ) {
-    game.Sprite.define('sprite_pointOnRadar')
-        .dimensions(30,30)
-        .asset('pointOnRadar');
-})()
+    game.Entity.define('entity_map')
+        .onCreate(function (args) {
+            var i;
+            
+            this.id = 'map';
+        
+            for (i = 0; i < args.length; ++i) {
+                this.addChild(args[i].type, args[i].data);
+            }
+        })
+    })()
+
+

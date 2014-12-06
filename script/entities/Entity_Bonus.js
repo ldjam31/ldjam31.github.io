@@ -23,18 +23,49 @@
  */
 
 (function ( ) {
-    game.Entity.define('entity_mine')
+    game.Module.define('module_bonusUpdater')
+        .data({
+            ttl: 0
+        })
+        .onUpdate(function (entity, screen, game) {
+            if (this.ttl <= 0) {
+                screen.removeEntity(this);
+            } else {
+                this.ttl--;
+            }
+        })
+
+    game.Entity.define('entity_bonus')
         .modules([
+            'module_bonusUpdater',
             'module_type'
         ])
-        .updateAnyways()
-        .onCreate(function (args, screen) {
+        .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
+            width: 30,
+            height: 30
+        })
+        .onCreate(function (args) {
+            this.module('module_type').type = args.type;
+            this.module('module_type').value = args.value || 0;
+            this.module('module_bonusUpdater').ttl = args.ttl;
+            
             this.x = args.x;
             this.y = args.y;
-            this.module('module_type').type = 'mine';
         })
-        .whenHitsEntities(['entity_player'], function (player, screen, game) {
-            game.state.armor -= player.module('module_physics').speed * 20;
+        .whenHitsEntities(['entity_player'], function (player, screen) {
+            var type = this.module('module_type');
+            
+            switch (type.type) {
+                case'ammo':
+                case'armor':
+                case'fuel':
+                    game.state[type.type] += type.value;
+                    if (game.state[type.type] > game.state[type.type + 'Max']) {
+                        game.state[type.type] = game.state[type.type + 'Max'];
+                    }
+                    break;
+            }
+            
             screen.removeEntity(this);
         })
 })()

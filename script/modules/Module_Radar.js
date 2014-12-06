@@ -31,41 +31,40 @@
             maxRange: 100,
         })
         .onUpdate(function (e, screen) {
-            var player, obstacles, nodeObstacle, distX, distY,
+            var player, map, nodeScannable, distX, distY,
                 dist, rotation, cosRotation, sinRotation, 
                 playerXCenter, playerYCenter, radarScreen;
 
             player = screen.getEntity('entity_player', 'player');
-            obstacles = screen.getEntity('entity_obstacles', 'obstacles');
+            map = screen.getEntity('entity_map', 'map');
             radarScreen = screen.getEntity('entity_radarScreen', 'radarScreen');
 
             if (this.range >= this.maxRange) {
                 this.range = 0;
             } else {
-//                this.range+= this.rangeInc;
                 this.range+=1;
             }
 
-            if (player && obstacles && radarScreen) {
+            if (player && map && radarScreen) {
                 rotation = player.module('module_physics').rotation + Math.PI / 2;
                 cosRotation = Math.cos(-rotation);
                 sinRotation = Math.sin(-rotation);
-                nodeObstacle = obstacles.firstChildNode;
+                nodeScannable = map.firstChildNode;
                 playerXCenter = player.xCenter;
                 playerYCenter = player.yCenter;
 
-                while (nodeObstacle) {
-                    distX = nodeObstacle.o.xCenter - playerXCenter;
-                    distY = nodeObstacle.o.yCenter - playerYCenter;
+                while (nodeScannable) {
+                    distX = nodeScannable.o.xCenter - playerXCenter;
+                    distY = nodeScannable.o.yCenter - playerYCenter;
                     dist = Math.sqrt(distX * distX + distY * distY);
 
                     if (~~dist === this.range) {
-                        parameters.type = 'enemy';
+                        parameters.type = nodeScannable.o.module('module_type').type;
                         parameters.x = distX * cosRotation - distY * sinRotation + 400;
                         parameters.y = distX * sinRotation + distY * cosRotation + 300;
                         radarScreen.addChild('entity_pointOnRadar', parameters);
                     }
-                    nodeObstacle = nodeObstacle.next;
+                    nodeScannable = nodeScannable.next;
                 }
             }
         });

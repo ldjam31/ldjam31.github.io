@@ -23,7 +23,9 @@
  */
 
 (function ( ) {
-    game.Sprite.define('sprite_pointOnRadar')
-        .dimensions(30,30)
-        .asset('pointOnRadar');
+    game.Module.define('module_type')
+        .data({
+            type: null,
+            value: 0
+        })
 })()

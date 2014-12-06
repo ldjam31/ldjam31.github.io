@@ -34,14 +34,18 @@
     var initialArmor = 100;
     var initialFuel = 100;
     var initialO2 = 100;
+    var initialAmmo = 5;
+    var ammoMax = 10;
 
     game.initialState({
+        ammo: initialAmmo,
+        ammoMax: ammoMax,
         armor: initialArmor,
-        maxArmor: initialArmor,
+        armorMax: initialArmor,
         fuel: initialFuel,
-        maxFuel: initialFuel,
+        fuelMax: initialFuel,
         o2: initialO2,
-        maxO2: initialO2,
+        o2Max: initialO2,
         time: 0
     });
 
