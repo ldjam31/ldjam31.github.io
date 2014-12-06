@@ -28,19 +28,22 @@
     
     game.Module.define('module_hudUpdater')
         .onUpdate(function (entity, screen, game) {
-            var sentence, player;
+            var sentence, player, seconds, minutes, hours;
         
             sentence = entity.child('armor');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'armor',
                     sentence: '100',
-                    x: 44,
+                    x: 50,
                     y: 192
                 })
             }
             sentence.module('module_sentenceDigit')
-                .sentence = ''+ ~~game.state.armor;
+                .sentence = 
+                    (game.state.armor < 100 ? '0' : '') +
+                    (game.state.armor < 10 ? '0' : '') +
+                    ~~game.state.armor;
 
             
             sentence = entity.child('o2');
@@ -48,31 +51,63 @@
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'o2',
                     sentence: '100',
-                    x: 44,
+                    x: 50,
                     y: 301
                 })
             }
             sentence.module('module_sentenceDigit')
-                .sentence = ''+ ~~game.state.o2;
+                .sentence =  
+                    (game.state.o2 < 100 ? '0' : '') +
+                    (game.state.o2 < 10 ? '0' : '') +
+                    ~~game.state.o2;
             
             sentence = entity.child('fuel');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'fuel',
                     sentence: '100',
-                    x: 44,
+                    x: 50,
                     y: 411
                 })
             }
             sentence.module('module_sentenceDigit')
-                .sentence = ''+ ~~game.state.fuel;
+                .sentence = 
+                    (game.state.fuel < 100 ? '0' : '') +
+                    (game.state.fuel < 10 ? '0' : '') +
+                    ~~game.state.fuel;
+            
+            sentence = entity.child('time');
+            if (!sentence) {
+                sentence = entity.addChild('entity_sentenceDigit', {
+                    id: 'time',
+                    sentence: '00:00:00',
+                    x: 199,
+                    y: 537
+                });
+            }
+            game.state.time ++;
+            
+            hours = ~~(game.state.time / 216000);
+            minutes = ~~(game.state.time % 216000 / 3600);
+            seconds = ~~(game.state.time % 216000 % 3600 / 60);
+            
+            sentence.module('module_sentenceDigit').sentence = 
+                ((hours < 10) ? '0' : '') + 
+                hours + 
+                ':' + 
+                ((minutes < 10) ? '0' : '') + 
+                minutes + 
+                ':' + 
+                ((seconds < 10) ? '0' : '') + 
+                seconds;
+            
             
             sentence = entity.child('coordinates');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'coordinates',
-                    sentence: '100',
-                    x: 425,
+                    sentence: '',
+                    x: 433,
                     y: 537
                 })
             }
@@ -81,8 +116,17 @@
             
             if (player) {
                 sentence.module('module_sentenceDigit')
-                    .sentence = ~~player.x +'.'+ ~~player.y;
+                    .sentence = 
+                        ((player.x < 100) ? '0' : '') + 
+                        ((player.x < 10) ? '0' : '') + 
+                        ~~player.x +
+                        '.'+ 
+                        ((player.y < 100) ? '0' : '') + 
+                        ((player.y < 10) ? '0' : '') + 
+                        ~~player.y;
             }
+            
+            
             
         });
 

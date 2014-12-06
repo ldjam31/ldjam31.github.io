@@ -40,7 +40,8 @@
         fuel: initialFuel,
         maxFuel: initialFuel,
         o2: initialO2,
-        maxO2: initialO2 
+        maxO2: initialO2,
+        time: 0
     });
 
     game.assets(assets)
