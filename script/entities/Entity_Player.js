@@ -43,6 +43,7 @@
             this.id = 'player';
             this.x = args.x;
             this.y = args.y;
+            this.module('module_physics').rotation = Math.PI / 2;
         })
         .whenKeyIsPressed(
             38, function (s, game) { //up

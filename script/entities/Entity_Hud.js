@@ -85,7 +85,6 @@
                     y: 537
                 });
             }
-            game.state.time ++;
             
             hours = ~~(game.state.time / 216000);
             minutes = ~~(game.state.time % 216000 / 3600);

@@ -48,8 +48,8 @@
             {
                 type: 'entity_player', 
                 data: {
-                    x: 64,
-                    y: 32
+                    x: 500,
+                    y: 500
                 }
             },
             {
@@ -59,6 +59,7 @@
             {type: 'entity_radarScreen'}
         ])
         .postEventModules([
-            'module_radar'
+            'module_radar',
+            'module_statsUpdater',
         ]);
 })()
