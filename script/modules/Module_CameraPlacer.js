@@ -27,6 +27,17 @@
         game.camera.x = player.xCenter - 400;
         game.camera.y = player.yCenter - 300;
     }
+
+    var placeRadarScreen = function (radarScreen, s, g) {
+        var nodePoint = radarScreen.firstChildNode;
+        
+        while (nodePoint) {
+            nodePoint.o.x = nodePoint.o.sprite.x + game.camera.x;
+            nodePoint.o.y = nodePoint.o.sprite.y + game.camera.y;
+            
+            nodePoint = nodePoint.next;
+        }
+    }
     
     var placeHud = function (hud, s, game) {
         hud.x = game.camera.x;
@@ -38,5 +49,6 @@
         .onUpdate(function (e, screen) {
             screen.ifEntity('entity_player', 'player', centerOnPlayer);
             screen.ifEntity('entity_hud', 'hud', placeHud);
+            screen.ifEntity('entity_radarScreen', 'radarScreen', placeRadarScreen);
         })
 })()

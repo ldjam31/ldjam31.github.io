@@ -23,37 +23,16 @@
  */
 
 (function ( ) {
-    var initialEnemies = [
-        {type: 'entity_mine', data: {x: 50, y: 50}},
-        {type: 'entity_mine', data: {x: 40, y: 50}},
-        {type: 'entity_mine', data: {x: 30, y: 50}},
-        {type: 'entity_mine', data: {x: 20, y: 50}},
-        {type: 'entity_mine', data: {x: 10, y: 50}},
-        {type: 'entity_mine', data: {x: 50, y: 40}},
-        {type: 'entity_mine', data: {x: 40, y: 40}},
-        {type: 'entity_mine', data: {x: 30, y: 40}},
-        {type: 'entity_mine', data: {x: 20, y: 40}},
-        {type: 'entity_mine', data: {x: 10, y: 40}}
-    ]
-    
-    game.Screen.define('screen_game')
-        .entities([
-            {type: 'entity_hud'},
-            {
-                type: 'entity_player', 
-                data: {
-                    x: 64,
-                    y: 32
-                }
-            },
-            {
-                type: 'entity_obstacles',
-                data: initialEnemies
-            },
-            {type: 'entity_radarScreen'}
-        ])
-        .postEventModules([
-            'module_cameraPlacer',
-            'module_radar'
-        ]);
-})()
+    game.Entity.define('entity_obstacles')
+        .onCreate(function (args) {
+            var i;
+            
+            this.id = 'obstacles';
+        
+            for (i = 0; i < args.length; ++i) {
+                this.addChild(args[i].type, args[i].data);
+            }
+        })
+    })()
+
+

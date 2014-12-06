@@ -23,9 +23,6 @@
  */
 
 (function ( ) {
-    var initialX = 100;
-    var initialY = 100;
-    
     game.Entity.define('entity_player')
         .modules([
             {
@@ -38,10 +35,10 @@
                 }
             },
         ])
-        .onCreate(function() {
+        .onCreate(function(args) {
             this.id = 'player';
-            this.x = initialX;
-            this.y = initialY;
+            this.x = args.x;
+            this.y = args.y;
         })
         .whenKeyIsPressed(
             38, function () { //up
@@ -55,12 +52,12 @@
         )
         .whenKeyIsPressed(
             37, function () { //left
-                this.module('module_physics').rotationAcceleration += 0.2;
+                this.module('module_physics').rotationAcceleration -= 0.05;
             }
         )
         .whenKeyIsPressed(
             39, function () { //right
-                this.module('module_physics').rotationAcceleration -= 0.2;
+                this.module('module_physics').rotationAcceleration += 0.05;
             }
         )
 })()

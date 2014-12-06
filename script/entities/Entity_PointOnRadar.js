@@ -23,37 +23,29 @@
  */
 
 (function ( ) {
-    var initialEnemies = [
-        {type: 'entity_mine', data: {x: 50, y: 50}},
-        {type: 'entity_mine', data: {x: 40, y: 50}},
-        {type: 'entity_mine', data: {x: 30, y: 50}},
-        {type: 'entity_mine', data: {x: 20, y: 50}},
-        {type: 'entity_mine', data: {x: 10, y: 50}},
-        {type: 'entity_mine', data: {x: 50, y: 40}},
-        {type: 'entity_mine', data: {x: 40, y: 40}},
-        {type: 'entity_mine', data: {x: 30, y: 40}},
-        {type: 'entity_mine', data: {x: 20, y: 40}},
-        {type: 'entity_mine', data: {x: 10, y: 40}}
-    ]
-    
-    game.Screen.define('screen_game')
-        .entities([
-            {type: 'entity_hud'},
-            {
-                type: 'entity_player', 
-                data: {
-                    x: 64,
-                    y: 32
-                }
-            },
-            {
-                type: 'entity_obstacles',
-                data: initialEnemies
-            },
-            {type: 'entity_radarScreen'}
+    game.Module.define('module_pointUpdater')
+        .data({
+            initialTTL: 90,
+            ttl: 90
+        })
+        .onUpdate(function (entity, screen) {
+            if (this.ttl <= 0) {
+                screen.removeEntity(entity);
+            } else {
+                entity.sprite.alpha = this.ttl / this.initialTTL;
+                this.ttl --;
+            }
+        })
+
+    game.Entity.define('entity_pointOnRadar')
+        .modules([
+            'module_pointUpdater'
         ])
-        .postEventModules([
-            'module_cameraPlacer',
-            'module_radar'
-        ]);
-})()
+        .sprite('sprite_pointOnRadar')
+        .onCreate(function (args) {
+            this.x = args.x;
+            this.y = args.y;
+        })
+    })()
+
+
