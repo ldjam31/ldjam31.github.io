@@ -9,11 +9,11 @@
 
 body
 {
-	width:400px;
+	width:800px;
 	height:100%;
 	margin:auto;
-	margin-top:50px;
-	margin-bottom:50px;
+	margin-top:30px;
+	margin-bottom:30px;
 	background:rgb(30,30,30);
 	color:rgb(235,235,235);
 	font-family:Calibri,Arial,sans-serif;
