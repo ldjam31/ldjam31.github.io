@@ -23,6 +23,9 @@
  */
 
 !(function () {
+    var x = -20;
+    var y = -20;
+    
     game.Module.define('module_hudUpdater')
         .onUpdate(function (entity, screen, game) {
             var sentence, player;
@@ -31,7 +34,9 @@
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'armor',
-                    sentence: '100'
+                    sentence: '100',
+                    x: 44,
+                    y: 192
                 })
             }
             sentence.module('module_sentenceDigit')
@@ -42,7 +47,9 @@
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'o2',
-                    sentence: '100'
+                    sentence: '100',
+                    x: 44,
+                    y: 301
                 })
             }
             sentence.module('module_sentenceDigit')
@@ -52,7 +59,9 @@
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'fuel',
-                    sentence: '100'
+                    sentence: '100',
+                    x: 44,
+                    y: 411
                 })
             }
             sentence.module('module_sentenceDigit')
@@ -62,7 +71,9 @@
             if (!sentence) {
                 sentence = entity.addChild('entity_sentenceDigit', {
                     id: 'coordinates',
-                    sentence: '100'
+                    sentence: '100',
+                    x: 425,
+                    y: 537
                 })
             }
             
@@ -81,7 +92,13 @@
         .modules([
             'module_hudUpdater'
         ])
+        .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
+            width : 840,
+            height: 640
+        })
         .onCreate(function () {
             this.id = 'hud';
+            this.x = x;
+            this.y = x;
         })
 })()

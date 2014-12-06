@@ -24,6 +24,7 @@
 
 (function ( ) {
     game.Entity.define('entity_mine')
+        .updateAnyways()
         .onCreate(function (args, screen) {
             this.x = args.x;
             this.y = args.y;

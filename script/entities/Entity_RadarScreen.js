@@ -23,12 +23,20 @@
  */
 
 (function ( ) {
+    var x = -20;
+    var y = -20;
+    
     game.Entity.define('entity_radarScreen')
         .sprite('sprite_glass')
         .updateAnyways()
-        
+        .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
+            width : 840,
+            height: 640
+        })
         .onCreate(function () {
             this.id = 'radarScreen';
+            this.x = x;
+            this.y = y;
             this.z = 2;
         })
 })()

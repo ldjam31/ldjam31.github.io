@@ -60,8 +60,8 @@
                     dist = Math.sqrt(distX * distX + distY * distY);
 
                     if (~~dist === this.range) {
-                        parameters.x = distX * cosRotation - distY * sinRotation + playerXCenter;
-                        parameters.y = distX * sinRotation + distY * cosRotation + playerYCenter;
+                        parameters.x = distX * cosRotation - distY * sinRotation + 400;
+                        parameters.y = distX * sinRotation + distY * cosRotation + 300;
                         radarScreen.addChild('entity_pointOnRadar', parameters);
                     }
                     nodeObstacle = nodeObstacle.next;

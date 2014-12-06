@@ -25,44 +25,45 @@
 (function ( ) {
     var fuelConsumptionForAcceleration = 0.01;
     var fuelConsumptionForRotationAcceleration = 0.01;
-    
+
     game.Entity.define('entity_player')
         .modules([
             {
                 type: 'module_physics',
                 data: {
                     maxSpeed: 2,
-                    maxRotationSpeed: Math.PI/20,
+                    maxRotationSpeed: Math.PI / 20,
                     inertia: 0.1,
-                    rotationInertia: Math.PI/22
+                    rotationInertia: Math.PI / 22
                 }
             },
         ])
-        .onCreate(function(args) {
+        .updateAnyways()
+        .onCreate(function (args) {
             this.id = 'player';
             this.x = args.x;
             this.y = args.y;
         })
         .whenKeyIsPressed(
-            38, function (s,game) { //up
+            38, function (s, game) { //up
                 this.module('module_physics').acceleration += 0.2;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
-            40, function (s,game) { //down
+            40, function (s, game) { //down
                 this.module('module_physics').acceleration -= 0.15;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
-            37, function (s,game) { //left
+            37, function (s, game) { //left
                 this.module('module_physics').rotationAcceleration -= 0.05;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
         .whenKeyIsPressed(
-            39, function (s,game) { //right
+            39, function (s, game) { //right
                 this.module('module_physics').rotationAcceleration += 0.05;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }

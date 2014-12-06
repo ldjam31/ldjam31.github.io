@@ -24,16 +24,22 @@
 
 (function ( ) {
     var initialEnemies = [
-        {type: 'entity_mine', data: {x: 50, y: 50}},
-        {type: 'entity_mine', data: {x: 40, y: 50}},
-        {type: 'entity_mine', data: {x: 30, y: 50}},
-        {type: 'entity_mine', data: {x: 20, y: 50}},
-        {type: 'entity_mine', data: {x: 10, y: 50}},
-        {type: 'entity_mine', data: {x: 50, y: 40}},
+        {type: 'entity_mine', data: {x: 60, y: 60}},
+        {type: 'entity_mine', data: {x: 40, y: 60}},
+        {type: 'entity_mine', data: {x: 20, y: 60}},
+        {type: 'entity_mine', data: {x: 0, y: 60}},
+        {type: 'entity_mine', data: {x: 60, y: 40}},
         {type: 'entity_mine', data: {x: 40, y: 40}},
-        {type: 'entity_mine', data: {x: 30, y: 40}},
         {type: 'entity_mine', data: {x: 20, y: 40}},
-        {type: 'entity_mine', data: {x: 10, y: 40}}
+        {type: 'entity_mine', data: {x: 0, y: 40}},
+        {type: 'entity_mine', data: {x: 60, y: 20}},
+        {type: 'entity_mine', data: {x: 40, y: 20}},
+        {type: 'entity_mine', data: {x: 20, y: 20}},
+        {type: 'entity_mine', data: {x: 0, y: 20}},
+        {type: 'entity_mine', data: {x: 60, y: 0}},
+        {type: 'entity_mine', data: {x: 40, y: 0}},
+        {type: 'entity_mine', data: {x: 20, y: 0}},
+        {type: 'entity_mine', data: {x: 0, y: 0}},
     ]
     
     game.Screen.define('screen_game')
@@ -53,7 +59,6 @@
             {type: 'entity_radarScreen'}
         ])
         .postEventModules([
-            'module_cameraPlacer',
             'module_radar'
         ]);
 })()
