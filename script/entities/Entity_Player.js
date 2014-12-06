@@ -23,6 +23,9 @@
  */
 
 (function ( ) {
+    var fuelConsumptionForAcceleration = 0.01;
+    var fuelConsumptionForRotationAcceleration = 0.01;
+    
     game.Entity.define('entity_player')
         .modules([
             {
@@ -41,23 +44,27 @@
             this.y = args.y;
         })
         .whenKeyIsPressed(
-            38, function () { //up
+            38, function (s,game) { //up
                 this.module('module_physics').acceleration += 0.2;
+                game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
-            40, function () { //down
+            40, function (s,game) { //down
                 this.module('module_physics').acceleration -= 0.15;
+                game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
-            37, function () { //left
+            37, function (s,game) { //left
                 this.module('module_physics').rotationAcceleration -= 0.05;
+                game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
         .whenKeyIsPressed(
-            39, function () { //right
+            39, function (s,game) { //right
                 this.module('module_physics').rotationAcceleration += 0.05;
+                game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
 })()

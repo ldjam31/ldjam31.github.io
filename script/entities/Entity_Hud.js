@@ -23,9 +23,48 @@
  */
 
 !(function () {
+    game.Module.define('module_hudUpdater')
+        .onUpdate(function (entity, s, game) {
+            var sentence;
+        
+            sentence = entity.child('armor');
+            if (!sentence) {
+                sentence = entity.addChild('entity_sentenceDigit', {
+                    id: 'armor',
+                    sentence: '100'
+                })
+            }
+            sentence.module('module_sentenceDigit')
+                .sentence = ''+ ~~(100 * game.state.armor / game.state.maxArmor);
+
+            
+            sentence = entity.child('o2');
+            if (!sentence) {
+                sentence = entity.addChild('entity_sentenceDigit', {
+                    id: 'o2',
+                    sentence: '100'
+                })
+            }
+            sentence.module('module_sentenceDigit')
+                .sentence = ''+ ~~(100 * game.state.o2 / game.state.maxO2);
+            
+            sentence = entity.child('fuel');
+            if (!sentence) {
+                sentence = entity.addChild('entity_sentenceDigit', {
+                    id: 'fuel',
+                    sentence: '100'
+                })
+            }
+            sentence.module('module_sentenceDigit')
+                .sentence = ''+ ~~(100 * game.state.fuel / game.state.maxFuel);
+        });
+
     game.Entity.define('entity_hud')
         .sprite('sprite_hud')
         .updateAnyways()
+        .modules([
+            'module_hudUpdater'
+        ])
         .onCreate(function () {
             this.id = 'hud';
         })

@@ -26,8 +26,22 @@
     var assets = [
         {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/Board.png'},
         {type: Cassava.Assets.IMAGE, name: 'glass', src: './assets/img/Glass.png'},
-        {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/point.png'}
+        {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/point.png'},
+        {type: Cassava.Assets.IMAGE, name: 'charactersDigit', src: './assets/img/Digits.png'}
     ];
+
+    var initialArmor = 100;
+    var initialFuel = 100;
+    var initialO2 = 100;
+
+    game.initialState({
+        armor: initialArmor,
+        maxArmor: initialArmor,
+        fuel: initialFuel,
+        maxFuel: initialFuel,
+        o2: initialO2,
+        maxO2: initialO2 
+    });
 
     game.assets(assets)
         .background('#007224')
