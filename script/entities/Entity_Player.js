@@ -28,11 +28,39 @@
     
     game.Entity.define('entity_player')
         .modules([
-            'module_physics'
+            {
+                type: 'module_physics',
+                data: {
+                    maxSpeed: 2,
+                    maxRotationSpeed: Math.PI/20,
+                    inertia: 0.1,
+                    rotationInertia: Math.PI/22
+                }
+            },
         ])
         .onCreate(function() {
             this.id = 'player';
             this.x = initialX;
             this.y = initialY;
         })
+        .whenKeyIsPressed(
+            38, function () { //up
+                this.module('module_physics').acceleration += 0.2;
+            }
+        )
+        .whenKeyIsPressed(
+            40, function () { //down
+                this.module('module_physics').acceleration -= 0.2;
+            }
+        )
+        .whenKeyIsPressed(
+            37, function () { //left
+                this.module('module_physics').rotationAcceleration += 0.2;
+            }
+        )
+        .whenKeyIsPressed(
+            39, function () { //right
+                this.module('module_physics').rotationAcceleration -= 0.2;
+            }
+        )
 })()

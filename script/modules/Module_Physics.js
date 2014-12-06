@@ -22,8 +22,77 @@
  * SOFTWARE.
  */
 
-(function ( ) {
+!(function () {
+    var data = {
+        speed: 0,
+        acceleration: 0,
+        maxSpeed: 0,
+        inertia: 0,
+        
+        rotation: 0,
+        rotationSpeed: 0,
+        maxRotationSpeed: 0,
+        rotationAcceleration: 0,
+        rotationInertia: 0,
+    };
+
+    function update(entity) {
+        //Avoid NaN situations
+        this.speed = this.speed || 0;
+        this.rotationSpeed = this.rotationSpeed || 0;
+        
+        this.acceleration = this.acceleration || 0;
+        this.rotationAcceleration = this.rotationAcceleration || 0;
+        
+        this.rotation = this.rotation || 0;
+        
+        this.speed = Cassava.fixedFloat(this.speed + this.acceleration);
+        if (this.speed > 0 && this.speed > this.maxSpeed) {
+            this.speed = this.maxSpeed;
+        }
+        if (this.speed < 0 && this.speed < -this.maxSpeed) {
+            this.speed = -this.maxSpeed;
+        }
+
+        this.rotationSpeed = Cassava.fixedFloat(this.rotationSpeed + this.rotationAcceleration);
+        if (this.rotationSpeed > 0 && this.rotationSpeed > this.maxRotationSpeed) {
+            this.rotationSpeed = this.maxRotationSpeed;
+        }
+        if (this.speed < 0 && this.speed < -this.maxRotationSpeed) {
+            this.rotationSpeed = -this.maxRotationSpeed;
+        }
+
+        this.rotation = Cassava.fixedFloat(this.rotation + this.rotationSpeed); 
+
+        entity.x = Cassava.fixedFloat(entity.x + this.speed * (Math.cos(this.rotation)));
+        entity.y = Cassava.fixedFloat(entity.y + this.speed * (Math.sin(this.rotation)));
+
+        if (this.speed < 0) {
+            this.speed = Cassava.fixedFloat(this.speed + this.inertia);
+            if (this.speed > 0) {
+                this.speed = 0;
+            }
+        } else if (this.speed > 0) {
+            this.speed = Cassava.fixedFloat(this.speed - this.inertia);
+            if (this.speed < 0) {
+                this.speed = 0;
+            }
+        }
+
+        this.acceleration = 0;
+        this.rotationAcceleration = 0;
+    }
+
+    function initPhysics(args) {
+        this.maxSpeed = args.maxSpeed || 0;
+        this.maxRotationSpeed = args.maxRotationSpeed || 0;
+
+        this.inertia = args.inertia || 0;
+        this.rotationInertia = args.rotationInertia || 0;
+    }
+
     game.Module.define('module_physics')
-        .data({
-        });
-})()
+        .data(data)
+        .onInit(initPhysics)
+        .onUpdate(update);
+})();
