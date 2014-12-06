@@ -23,6 +23,9 @@
  */
 
 !(function () {
+    var MAX_LIMITS = 999;
+    var MIN_LIMITS = 0;
+    
     var data = {
         speed: 0,
         acceleration: 0,
@@ -66,6 +69,22 @@
 
         entity.x = Cassava.fixedFloat(entity.x + this.speed * (Math.cos(this.rotation)));
         entity.y = Cassava.fixedFloat(entity.y + this.speed * (Math.sin(this.rotation)));
+
+        if (entity.x < MIN_LIMITS) {
+            entity.x = MIN_LIMITS;
+        }
+        
+        if (entity.y < MIN_LIMITS) {
+            entity.y = MIN_LIMITS;
+        }
+        
+        if (entity.x2 > MAX_LIMITS) {
+            entity.x = MAX_LIMITS - entity.width;
+        }
+        
+        if (entity.y2 > MAX_LIMITS) {
+            entity.y = MAX_LIMITS - entity.height;
+        }
 
         if (this.speed < 0) {
             this.speed = Cassava.fixedFloat(this.speed + this.inertia);

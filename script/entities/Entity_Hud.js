@@ -24,8 +24,8 @@
 
 !(function () {
     game.Module.define('module_hudUpdater')
-        .onUpdate(function (entity, s, game) {
-            var sentence;
+        .onUpdate(function (entity, screen, game) {
+            var sentence, player;
         
             sentence = entity.child('armor');
             if (!sentence) {
@@ -35,7 +35,7 @@
                 })
             }
             sentence.module('module_sentenceDigit')
-                .sentence = ''+ ~~(100 * game.state.armor / game.state.maxArmor);
+                .sentence = ''+ ~~game.state.armor;
 
             
             sentence = entity.child('o2');
@@ -46,7 +46,7 @@
                 })
             }
             sentence.module('module_sentenceDigit')
-                .sentence = ''+ ~~(100 * game.state.o2 / game.state.maxO2);
+                .sentence = ''+ ~~game.state.o2;
             
             sentence = entity.child('fuel');
             if (!sentence) {
@@ -56,7 +56,23 @@
                 })
             }
             sentence.module('module_sentenceDigit')
-                .sentence = ''+ ~~(100 * game.state.fuel / game.state.maxFuel);
+                .sentence = ''+ ~~game.state.fuel;
+            
+            sentence = entity.child('coordinates');
+            if (!sentence) {
+                sentence = entity.addChild('entity_sentenceDigit', {
+                    id: 'coordinates',
+                    sentence: '100'
+                })
+            }
+            
+            player = screen.getEntity('entity_player', 'player');
+            
+            if (player) {
+                sentence.module('module_sentenceDigit')
+                    .sentence = ~~player.x +'.'+ ~~player.y;
+            }
+            
         });
 
     game.Entity.define('entity_hud')

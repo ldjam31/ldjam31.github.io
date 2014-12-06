@@ -68,6 +68,13 @@
             child.y = Cassava.fixedFloat(game.camera.y + 411);
             child.module('module_sentenceDigit').update(child);
         }
+        
+        child = hud.child('coordinates')
+        if (child) {
+            child.x = Cassava.fixedFloat(game.camera.x + 425);
+            child.y = Cassava.fixedFloat(game.camera.y + 537);
+            child.module('module_sentenceDigit').update(child);
+        }
     }
 
     game.Module.define('module_cameraPlacer')
