@@ -47,7 +47,7 @@
         )
         .whenKeyIsPressed(
             40, function () { //down
-                this.module('module_physics').acceleration -= 0.2;
+                this.module('module_physics').acceleration -= 0.15;
             }
         )
         .whenKeyIsPressed(

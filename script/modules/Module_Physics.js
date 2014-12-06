@@ -58,7 +58,7 @@
         if (this.rotationSpeed > 0 && this.rotationSpeed > this.maxRotationSpeed) {
             this.rotationSpeed = this.maxRotationSpeed;
         }
-        if (this.speed < 0 && this.speed < -this.maxRotationSpeed) {
+        if (this.rotationSpeed < 0 && this.rotationSpeed < -this.maxRotationSpeed) {
             this.rotationSpeed = -this.maxRotationSpeed;
         }
 
