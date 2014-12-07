@@ -37,6 +37,6 @@
             this.id = 'radarScreen';
             this.x = x;
             this.y = y;
-            this.z = 2;
+            this.z = 3;
         })
 })()
