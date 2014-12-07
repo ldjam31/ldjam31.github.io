@@ -42,7 +42,8 @@
         {type: 'entity_mine', data: {x: 0, y: 0}},
         {type: 'entity_bonus', data: {x: 100, y: 100, type:'fuel', value: '10'}},
         {type: 'entity_bonus', data: {x: 200, y: 200, type:'armor', value: '10'}},
-        {type: 'entity_bonus', data: {x: 300, y: 300, type:'ammo', value: '2'}}
+        {type: 'entity_bonus', data: {x: 300, y: 300, type:'ammo', value: '2'}},
+        {type: 'entity_bonus', data: {x: 500, y: 530, type:'ammo', value: '2'}}
     ]
     
     game.Screen.define('screen_game')

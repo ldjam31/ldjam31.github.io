@@ -26,7 +26,7 @@
     var assets = [
         {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/Board.png'},
         {type: Cassava.Assets.IMAGE, name: 'glass', src: './assets/img/Glass.png'},
-        {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/icons.png'},
+        {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/Icons.png'},
         {type: Cassava.Assets.IMAGE, name: 'charactersDigit', src: './assets/img/Digits.png'},
         {type: Cassava.Assets.IMAGE, name: 'shattering', src: './assets/img/shattering.png'},
         {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'}
