@@ -50,7 +50,7 @@
                         continue;
                     }
                     
-                    entitiesToPut = ~~(1 + Math.random() * (MAX_ROCKS_PER_CELL - MIN_ROCKS_PER_CELL + 1)) + MIN_ROCKS_PER_CELL;
+                    entitiesToPut = ~~(1 + Math.random() * (MAX_ROCKS_PER_CELL - MIN_ROCKS_PER_CELL)) + MIN_ROCKS_PER_CELL;
                     for (k = 0; k < entitiesToPut; ++k) {
                         cell.addChild('entity_rock', {
                             x: originX + ~~(Math.random() * CELL_SIZE),
@@ -58,7 +58,7 @@
                         })
                     }
                     
-                    entitiesToPut = ~~(1 + Math.random() * (MAX_MINES_PER_CELL - MIN_MINES_PER_CELL + 1)) + MIN_MINES_PER_CELL;
+                    entitiesToPut = ~~(1 + Math.random() * (MAX_MINES_PER_CELL - MIN_MINES_PER_CELL)) + MIN_MINES_PER_CELL;
                     for (k = 0; k < entitiesToPut; ++k) {
                         cell.addChild('entity_mine', {
                             x: originX + ~~(Math.random() * CELL_SIZE),

@@ -35,10 +35,10 @@
             {
                 type: 'module_physics',
                 data: {
-                    maxSpeed: 1,
-                    maxRotationSpeed: Math.PI / 20,
-                    inertia: 0.0001,
-                    rotationInertia: 0.00005
+                    maxSpeed: 0.2,
+                    maxRotationSpeed: Math.PI / 200,
+                    inertia: 0.0003,
+                    rotationInertia: 0.00008
                 }
             },
         ])
@@ -51,25 +51,25 @@
         })
         .whenKeyIsPressed(
             38, function (s, game) { //up
-                this.module('module_physics').acceleration += 0.002;
+                this.module('module_physics').acceleration += 0.0018;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
             40, function (s, game) { //down
-                this.module('module_physics').acceleration -= 0.0015;
+                this.module('module_physics').acceleration -= 0.001;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
             37, function (s, game) { //left
-                this.module('module_physics').rotationAcceleration -= 0.001;
+                this.module('module_physics').rotationAcceleration -= 0.0005;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
         .whenKeyIsPressed(
             39, function (s, game) { //right
-                this.module('module_physics').rotationAcceleration += 0.001;
+                this.module('module_physics').rotationAcceleration += 0.0005;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
