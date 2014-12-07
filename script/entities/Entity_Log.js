@@ -25,7 +25,7 @@
 !(function () {
     var MAX_LOGS_DISPLAYABLE = 4;
     var LOGS_X = 193;
-    var LOGS_Y = 12;
+    var LOGS_Y = 9;
 
     game.Module.define('module_logUpdater')
         .data({
@@ -33,9 +33,9 @@
         })
         .onUpdate(function (entity) {
             if (this.lastLog) {
-                entity.child('log0').module('module_sentence').sentence = entity.child('log3').module('module_sentence').sentence;
+                entity.child('log0').module('module_sentence').sentence = entity.child('log1').module('module_sentence').sentence;
                 entity.child('log1').module('module_sentence').sentence = entity.child('log2').module('module_sentence').sentence;
-                entity.child('log2').module('module_sentence').sentence = entity.child('log1').module('module_sentence').sentence;
+                entity.child('log2').module('module_sentence').sentence = entity.child('log3').module('module_sentence').sentence;
                 entity.child('log3').module('module_sentence').sentence = this.lastLog;
                 
                 this.lastLog = null;
@@ -57,7 +57,7 @@
                     characterWidth: 15,
                     characterHeight: 30,
                     x: LOGS_X,
-                    y: LOGS_Y + i * 20
+                    y: LOGS_Y + i * 22
                 })
             }
         })
