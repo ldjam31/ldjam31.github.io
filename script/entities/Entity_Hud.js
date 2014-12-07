@@ -26,6 +26,8 @@
     var x = -20;
     var y = -20;
     
+    var MAP_HEIGHT = 1000;
+    
     game.Module.define('module_hudUpdater')
         .onUpdate(function (entity, screen, game) {
             var sentence, player, seconds, minutes, hours, compass;
@@ -115,7 +117,7 @@
             if (!compass) {
                 compass = entity.addChild('entity_compass', {
                     x: 714,
-                    y:61
+                    y: 61
                 })
             }
             
@@ -127,9 +129,9 @@
                         ((player.x < 10) ? '0' : '') + 
                         ~~player.x +
                         '.'+ 
-                        ((player.y < 100) ? '0' : '') + 
-                        ((player.y < 10) ? '0' : '') + 
-                        ~~player.y;
+                        ((MAP_HEIGHT - player.y < 100) ? '0' : '') + 
+                        ((MAP_HEIGHT -player.y < 10) ? '0' : '') + 
+                        ~~(MAP_HEIGHT -player.y);
                     
                 compass.sprite.rotation = -player.module('module_physics').rotation * 1 - Math.PI/2;
             }
