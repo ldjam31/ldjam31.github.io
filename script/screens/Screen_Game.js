@@ -23,33 +23,6 @@
  */
 
 (function ( ) {
-    var initialEnemies = [
-        {type: 'entity_mine', data: {x: 560, y: 560}},
-        {type: 'entity_mine', data: {x: 540, y: 560}},
-        {type: 'entity_mine', data: {x: 520, y: 560}},
-        {type: 'entity_mine', data: {x: 500, y: 560}},
-        {type: 'entity_mine', data: {x: 560, y: 540}},
-        {type: 'entity_mine', data: {x: 540, y: 540}},
-        {type: 'entity_mine', data: {x: 520, y: 540}},
-        {type: 'entity_mine', data: {x: 500, y: 540}},
-        {type: 'entity_mine', data: {x: 560, y: 520}},
-        {type: 'entity_mine', data: {x: 540, y: 520}},
-        {type: 'entity_mine', data: {x: 520, y: 520}},
-        {type: 'entity_mine', data: {x: 500, y: 520}},
-        {type: 'entity_mine', data: {x: 560, y: 500}},
-        {type: 'entity_mine', data: {x: 540, y: 500}},
-        {type: 'entity_mine', data: {x: 520, y: 500}},
-        {type: 'entity_mine', data: {x: 500, y: 500}},
-        {type: 'entity_rock', data: {x: 400, y: 450}},
-        {type: 'entity_rock', data: {x: 500, y: 450}},
-        {type: 'entity_rock', data: {x: 450, y: 400}},
-        {type: 'entity_rock', data: {x: 450, y: 500}},
-        {type: 'entity_bonus', data: {x: 100, y: 100, type:'fuel', value: '10'}},
-        {type: 'entity_bonus', data: {x: 200, y: 200, type:'armor', value: '10'}},
-        {type: 'entity_bonus', data: {x: 300, y: 300, type:'ammo', value: '2'}},
-        {type: 'entity_bonus', data: {x: 400, y: 530, type:'ammo', value: '2'}}
-    ]
-    
     game.Screen.define('screen_game')
         .entities([
             {type: 'entity_hud'},
@@ -61,11 +34,11 @@
                 }
             },
             {
-                type: 'entity_map',
-                data: initialEnemies
+                type: 'entity_map'
             },
             {type: 'entity_radarScreen'},
-            {type: 'entity_shattering'}
+            {type: 'entity_shattering'},
+            {type: 'entity_eventsManager'},
         ])
         .postEventModules([
             'module_radar',

@@ -29,16 +29,17 @@
 
     game.Module.define('module_logUpdater')
         .data({
-            lastLog: null
+            logsBuffer: null
+        })
+        .onInit(function () {
+            this.logsBuffer = [];
         })
         .onUpdate(function (entity) {
-            if (this.lastLog) {
+            while (this.logsBuffer.length !== 0) {
                 entity.child('log0').module('module_sentence').sentence = entity.child('log1').module('module_sentence').sentence;
                 entity.child('log1').module('module_sentence').sentence = entity.child('log2').module('module_sentence').sentence;
                 entity.child('log2').module('module_sentence').sentence = entity.child('log3').module('module_sentence').sentence;
-                entity.child('log3').module('module_sentence').sentence = this.lastLog;
-                
-                this.lastLog = null;
+                entity.child('log3').module('module_sentence').sentence = this.logsBuffer.pop();
             }
         });
 
@@ -48,19 +49,17 @@
         ])
         .onCreate(function () {
             this.id = 'log';
-            
+
             for (i = 0; i < MAX_LOGS_DISPLAYABLE; ++i) {
                 this.addChild('entity_sentence', {
                     id: 'log' + i,
-                    sentence: 'a/+,,\'' + i,
+                    sentence: '',
                     character: 'entity_characterFont',
-                    characterWidth: 15,
+                    characterWidth: 13,
                     characterHeight: 30,
                     x: LOGS_X,
                     y: LOGS_Y + i * 22
                 })
             }
         })
-
-
 })();

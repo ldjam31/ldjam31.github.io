@@ -23,7 +23,7 @@
  */
 
 (function ( ) {
-    var fuelConsumptionForAcceleration = 0.01;
+    var fuelConsumptionForAcceleration = 0.018;
     var fuelConsumptionForRotationAcceleration = 0.01;
 
     game.Entity.define('entity_player')
@@ -35,10 +35,10 @@
             {
                 type: 'module_physics',
                 data: {
-                    maxSpeed: 2,
+                    maxSpeed: 1,
                     maxRotationSpeed: Math.PI / 20,
-                    inertia: 0.1,
-                    rotationInertia: Math.PI / 22
+                    inertia: 0.0001,
+                    rotationInertia: 0.00005
                 }
             },
         ])
@@ -51,25 +51,25 @@
         })
         .whenKeyIsPressed(
             38, function (s, game) { //up
-                this.module('module_physics').acceleration += 0.2;
+                this.module('module_physics').acceleration += 0.002;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
             40, function (s, game) { //down
-                this.module('module_physics').acceleration -= 0.15;
+                this.module('module_physics').acceleration -= 0.0015;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
             37, function (s, game) { //left
-                this.module('module_physics').rotationAcceleration -= 0.05;
+                this.module('module_physics').rotationAcceleration -= 0.001;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
         .whenKeyIsPressed(
             39, function (s, game) { //right
-                this.module('module_physics').rotationAcceleration += 0.05;
+                this.module('module_physics').rotationAcceleration += 0.001;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )

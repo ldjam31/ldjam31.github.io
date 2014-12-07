@@ -30,7 +30,7 @@
     var CELL_SIZE = MAP_LIMITS / 10;
 
     game.Entity.define('entity_map')
-        .onCreate(function (args) {
+        .onCreate(function () {
             var i, j, k, entitiesToPut, cell, originX, originY;
 
 

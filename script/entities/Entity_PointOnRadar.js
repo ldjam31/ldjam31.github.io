@@ -23,10 +23,12 @@
  */
 
 (function ( ) {
+    var POINT_TTL = 45;
+    
     game.Module.define('module_pointUpdater')
         .data({
-            initialTTL: 90,
-            ttl: 90
+            initialTTL: POINT_TTL,
+            ttl: POINT_TTL
         })
         .onUpdate(function (entity, screen) {
             if (this.ttl <= 0) {
