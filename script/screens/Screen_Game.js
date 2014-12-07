@@ -56,8 +56,8 @@
             {
                 type: 'entity_player', 
                 data: {
-                    x: 450,
-                    y: 450
+                    x: MAP_LIMITS / 2,
+                    y: MAP_LIMITS / 2
                 }
             },
             {

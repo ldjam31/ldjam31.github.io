@@ -24,6 +24,8 @@
 
 var game;
 
+var MAP_LIMITS = 900;
+
 (function () {
     game = new Cassava.Game('game', 'canvas', 800, 600, 1);
     game.background('#FFFFFF');

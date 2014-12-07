@@ -26,8 +26,6 @@
     var x = -20;
     var y = -20;
     
-    var MAP_HEIGHT = 900;
-    
     var DIGIT = 'entity_characterDigit';
     var DIGIT_WIDTH = 22;
     var DIGIT_HEIGHT = 37;
@@ -148,9 +146,9 @@
                         ((player.x < 10) ? '0' : '') + 
                         ~~player.x +
                         '.'+ 
-                        ((MAP_HEIGHT - player.y < 100) ? '0' : '') + 
-                        ((MAP_HEIGHT -player.y < 10) ? '0' : '') + 
-                        ~~(MAP_HEIGHT -player.y);
+                        ((MAP_LIMITS - player.y < 100) ? '0' : '') + 
+                        ((MAP_LIMITS -player.y < 10) ? '0' : '') + 
+                        ~~(MAP_LIMITS -player.y);
                     
                 compass.sprite.rotation = -player.module('module_physics').rotation * 1 - Math.PI/2;
             }
