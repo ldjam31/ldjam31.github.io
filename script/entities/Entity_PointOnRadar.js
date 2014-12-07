@@ -62,7 +62,7 @@
                 case 'armor':
                     this.sprite.frame = 7;
                     break;
-                case 'ammos':
+                case 'ammo':
                     this.sprite.frame = 8;
                     break;
                 case 'fuel':
