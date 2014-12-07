@@ -23,14 +23,49 @@
  */
 
 (function ( ) {
+    var MIN_ROCKS_PER_CELL = 0;
+    var MAX_ROCKS_PER_CELL = 2;
+    var MIN_MINES_PER_CELL = 0;
+    var MAX_MINES_PER_CELL = 1;
+    var CELL_SIZE = MAP_LIMITS / 10;
+
     game.Entity.define('entity_map')
         .onCreate(function (args) {
-            var i;
-            
+            var i, j, k, entitiesToPut, cell, originX, originY;
+
+
             this.id = 'map';
-        
-            for (i = 0; i < args.length; ++i) {
-                this.addChild(args[i].type, args[i].data);
+
+            //Dispatch mines and rocks on map
+            for (i = 0; i < 10; ++i) {
+                for (j = 0; j < 10; ++j) {
+                    originX = CELL_SIZE * i;
+                    originY = CELL_SIZE * j;
+                    
+                    cell = this.addChild('entity_cell', {
+                        id: 'cell_' + i + '_' + j
+                    });
+                    
+                    if ((i === 4 || i === 5) && (j===4 || j === 5)) {
+                        continue;
+                    }
+                    
+                    entitiesToPut = ~~(1 + Math.random() * (MAX_ROCKS_PER_CELL - MIN_ROCKS_PER_CELL + 1)) + MIN_ROCKS_PER_CELL;
+                    for (k = 0; k < entitiesToPut; ++k) {
+                        cell.addChild('entity_rock', {
+                            x: originX + ~~(Math.random() * CELL_SIZE),
+                            y: originY + ~~(Math.random() * CELL_SIZE)
+                        })
+                    }
+                    
+                    entitiesToPut = ~~(1 + Math.random() * (MAX_MINES_PER_CELL - MIN_MINES_PER_CELL + 1)) + MIN_MINES_PER_CELL;
+                    for (k = 0; k < entitiesToPut; ++k) {
+                        cell.addChild('entity_mine', {
+                            x: originX + ~~(Math.random() * CELL_SIZE),
+                            y: originY + ~~(Math.random() * CELL_SIZE)
+                        })
+                    }
+                }
             }
         })
-    })()
+})()

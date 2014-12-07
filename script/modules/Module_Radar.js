@@ -48,22 +48,28 @@
                     rotation = player.module('module_physics').rotation + Math.PI / 2;
                     cosRotation = Math.cos(-rotation);
                     sinRotation = Math.sin(-rotation);
-                    nodeScannable = map.firstChildNode;
+                    nodeCell = map.firstChildNode;
                     playerXCenter = player.xCenter;
                     playerYCenter = player.yCenter;
 
-                    while (nodeScannable) {
-                        distX = nodeScannable.o.xCenter - playerXCenter;
-                        distY = nodeScannable.o.yCenter - playerYCenter;
-                        dist = Math.sqrt(distX * distX + distY * distY);
+                    while (nodeCell) {
+                        nodeScannable = nodeCell.o.firstChildNode;
+                        while (nodeScannable) {
+                        
+                            distX = nodeScannable.o.xCenter - playerXCenter;
+                            distY = nodeScannable.o.yCenter - playerYCenter;
+                            dist = Math.sqrt(distX * distX + distY * distY);
 
-                        if (~~dist >= this.rangeIn && ~~dist < this.rangeOut) {
-                            parameters.type = nodeScannable.o.module('module_type').type;
-                            parameters.x = distX * cosRotation - distY * sinRotation + 400;
-                            parameters.y = distX * sinRotation + distY * cosRotation + 300;
-                            radarScreen.addChild('entity_pointOnRadar', parameters);
+                            if (~~dist >= this.rangeIn && ~~dist < this.rangeOut) {
+                                parameters.type = nodeScannable.o.module('module_type').type;
+                                parameters.x = distX * cosRotation - distY * sinRotation + 400;
+                                parameters.y = distX * sinRotation + distY * cosRotation + 300;
+                                radarScreen.addChild('entity_pointOnRadar', parameters);
+                            }
+                            
+                            nodeScannable = nodeScannable.next;
                         }
-                        nodeScannable = nodeScannable.next;
+                        nodeCell = nodeCell.next;
                     }
                     
                     if (this.rangeOut >= this.maxRange) {
