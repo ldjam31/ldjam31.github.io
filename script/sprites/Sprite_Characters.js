@@ -22,19 +22,10 @@
  * SOFTWARE.
  */
 
-(function ( ) {
-    var O2_DECREASING = 0.008;
-    
-    game.Module.define('module_statsUpdater')
-        .data({
-            o2Decreasing: O2_DECREASING
-        })
-        .onUpdate(function (e,s,game) {
-            game.state.o2 -= this.o2Decreasing;
-            game.state.time ++;
-            
-            game.state.armor = (game.state.armor < 0) ? 0 : game.state.armor;
-            game.state.fuel = (game.state.fuel < 0) ? 0 : game.state.fuel;
-            game.state.o2 = (game.state.o2 < 0) ? 0 : game.state.o2;
-        })
-})()
+game.Sprite.define('sprite_charactersDigit')
+    .asset('charactersDigit')
+    .dimensions(22,37);
+
+game.Sprite.define('sprite_charactersFont')
+    .asset('charactersFont')
+    .dimensions(15,30);

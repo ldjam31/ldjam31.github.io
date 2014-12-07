@@ -26,7 +26,11 @@
     var x = -20;
     var y = -20;
     
-    var MAP_HEIGHT = 1000;
+    var MAP_HEIGHT = 900;
+    
+    var DIGIT = 'entity_characterDigit';
+    var DIGIT_WIDTH = 22;
+    var DIGIT_HEIGHT = 37;
     
     game.Module.define('module_hudUpdater')
         .onUpdate(function (entity, screen, game) {
@@ -34,14 +38,17 @@
         
             sentence = entity.child('armor');
             if (!sentence) {
-                sentence = entity.addChild('entity_sentenceDigit', {
+                sentence = entity.addChild('entity_sentence', {
                     id: 'armor',
                     sentence: '100',
+                    character: DIGIT,
+                    characterWidth: DIGIT_WIDTH,
+                    characterHeight: DIGIT_HEIGHT,
                     x: 50,
                     y: 192
                 })
             }
-            sentence.module('module_sentenceDigit')
+            sentence.module('module_sentence')
                 .sentence = 
                     (game.state.armor < 100 ? '0' : '') +
                     (game.state.armor < 10 ? '0' : '') +
@@ -50,14 +57,17 @@
             
             sentence = entity.child('o2');
             if (!sentence) {
-                sentence = entity.addChild('entity_sentenceDigit', {
+                sentence = entity.addChild('entity_sentence', {
                     id: 'o2',
                     sentence: '100',
+                    character: DIGIT,
+                    characterWidth: DIGIT_WIDTH,
+                    characterHeight: DIGIT_HEIGHT,
                     x: 50,
                     y: 301
                 })
             }
-            sentence.module('module_sentenceDigit')
+            sentence.module('module_sentence')
                 .sentence =  
                     (game.state.o2 < 100 ? '0' : '') +
                     (game.state.o2 < 10 ? '0' : '') +
@@ -65,14 +75,17 @@
             
             sentence = entity.child('fuel');
             if (!sentence) {
-                sentence = entity.addChild('entity_sentenceDigit', {
+                sentence = entity.addChild('entity_sentence', {
                     id: 'fuel',
                     sentence: '100',
+                    character: DIGIT,
+                    characterWidth: DIGIT_WIDTH,
+                    characterHeight: DIGIT_HEIGHT,
                     x: 50,
                     y: 411
                 })
             }
-            sentence.module('module_sentenceDigit')
+            sentence.module('module_sentence')
                 .sentence = 
                     (game.state.fuel < 100 ? '0' : '') +
                     (game.state.fuel < 10 ? '0' : '') +
@@ -80,9 +93,12 @@
             
             sentence = entity.child('time');
             if (!sentence) {
-                sentence = entity.addChild('entity_sentenceDigit', {
+                sentence = entity.addChild('entity_sentence', {
                     id: 'time',
                     sentence: '00:00:00',
+                    character: DIGIT,
+                    characterWidth: DIGIT_WIDTH,
+                    characterHeight: DIGIT_HEIGHT,
                     x: 199,
                     y: 537
                 });
@@ -92,7 +108,7 @@
             minutes = ~~(game.state.time % 216000 / 3600);
             seconds = ~~(game.state.time % 216000 % 3600 / 60);
             
-            sentence.module('module_sentenceDigit').sentence = 
+            sentence.module('module_sentence').sentence = 
                 ((hours < 10) ? '0' : '') + 
                 hours + 
                 ':' + 
@@ -105,8 +121,11 @@
             
             sentence = entity.child('coordinates');
             if (!sentence) {
-                sentence = entity.addChild('entity_sentenceDigit', {
+                sentence = entity.addChild('entity_sentence', {
                     id: 'coordinates',
+                    character: DIGIT,
+                    characterWidth: DIGIT_WIDTH,
+                    characterHeight: DIGIT_HEIGHT,
                     sentence: '',
                     x: 433,
                     y: 537
@@ -123,7 +142,7 @@
             
             player = screen.getEntity('entity_player', 'player');
             if (player) {
-                sentence.module('module_sentenceDigit')
+                sentence.module('module_sentence')
                     .sentence = 
                         ((player.x < 100) ? '0' : '') + 
                         ((player.x < 10) ? '0' : '') + 
@@ -135,7 +154,10 @@
                     
                 compass.sprite.rotation = -player.module('module_physics').rotation * 1 - Math.PI/2;
             }
-        });
+        })
+        .onInit(function() {
+            this.entity.addChild('entity_log');
+        })
 
     game.Entity.define('entity_hud')
         .sprite('sprite_hud')

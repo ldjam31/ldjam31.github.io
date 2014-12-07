@@ -28,8 +28,9 @@
         {type: Cassava.Assets.IMAGE, name: 'glass', src: './assets/img/Glass.png'},
         {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/Icons.png'},
         {type: Cassava.Assets.IMAGE, name: 'charactersDigit', src: './assets/img/Digits.png'},
+        {type: Cassava.Assets.IMAGE, name: 'charactersFont', src: './assets/img/Font.png'},
         {type: Cassava.Assets.IMAGE, name: 'shattering', src: './assets/img/shattering.png'},
-        {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'}
+        {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'},
     ];
 
     var initialArmor = 100;

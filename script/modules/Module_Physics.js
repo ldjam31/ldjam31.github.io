@@ -23,7 +23,7 @@
  */
 
 !(function () {
-    var MAX_LIMITS = 999;
+    var MAX_LIMITS = 900;
     var MIN_LIMITS = 0;
     
     var data = {

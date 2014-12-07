@@ -52,8 +52,8 @@
             {
                 type: 'entity_player', 
                 data: {
-                    x: 500,
-                    y: 500
+                    x: 450,
+                    y: 450
                 }
             },
             {
