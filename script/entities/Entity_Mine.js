@@ -34,7 +34,10 @@
             this.module('module_type').type = 'mine';
         })
         .whenHitsEntities(['entity_player'], function (player, screen, game) {
-            game.state.armor -= player.module('module_physics').speed * 20;
-            screen.removeEntity(this);
+            if (game.state.invincibility === 0) {
+                game.state.invincibility = 60;
+                game.state.armor -= player.module('module_physics').speed * 20;
+                screen.removeEntity(this);
+            }
         })
 })()

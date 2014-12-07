@@ -23,22 +23,20 @@
  */
 
 (function ( ) {
-    var O2_DECREASING = 0.008;
-    
-    game.Module.define('module_statsUpdater')
-        .data({
-            o2Decreasing: O2_DECREASING
+    game.Entity.define('entity_rock')
+        .modules([
+            'module_type'
+        ])
+        .updateAnyways()
+        .onCreate(function (args, screen) {
+            this.x = args.x;
+            this.y = args.y;
+            this.module('module_type').type = 'rock';
         })
-        .onUpdate(function (e,s,game) {
-            if (game.state.invincibility > 0) {
-                game.state.invincibility --;
+        .whenHitsEntities(['entity_player'], function (player, screen, game) {
+            if (game.state.invincibility === 0) {
+                game.state.invincibility = 60;
+                game.state.armor -= player.module('module_physics').speed * 20;
             }
-                
-            game.state.o2 -= this.o2Decreasing;
-            game.state.time ++;
-            
-            game.state.armor = (game.state.armor < 0) ? 0 : game.state.armor;
-            game.state.fuel = (game.state.fuel < 0) ? 0 : game.state.fuel;
-            game.state.o2 = (game.state.o2 < 0) ? 0 : game.state.o2;
         })
 })()

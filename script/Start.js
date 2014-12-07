@@ -43,6 +43,7 @@
         ammo: initialAmmo,
         ammoMax: ammoMax,
 //        armor: initialArmor,
+        invincibility: 0,
         armor: 67,
         armorMax: initialArmor,
 //        fuel: initialFuel,

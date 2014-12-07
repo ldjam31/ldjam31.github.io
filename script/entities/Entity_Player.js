@@ -28,8 +28,8 @@
 
     game.Entity.define('entity_player')
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
-            width: 8,
-            height: 14
+            width: 20,
+            height: 20
         })
         .modules([
             {
