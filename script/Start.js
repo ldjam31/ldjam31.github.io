@@ -35,8 +35,8 @@
     var initialArmor = 100;
     var initialFuel = 100;
     var initialO2 = 100;
-    var initialAmmo = 5;
-    var ammoMax = 10;
+    var initialAmmo = 10;
+    var ammoMax = 5;
 
     game.initialState({
         ammo: initialAmmo,

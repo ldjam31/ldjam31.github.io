@@ -63,14 +63,29 @@
         )
         .whenKeyIsPressed(
             37, function (s, game) { //left
-                this.module('module_physics').rotationAcceleration -= 0.05;
+                this.module('module_physics').rotationAcceleration += 0.05;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
         .whenKeyIsPressed(
             39, function (s, game) { //right
-                this.module('module_physics').rotationAcceleration += 0.05;
+                this.module('module_physics').rotationAcceleration -= 0.05;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
+            }
+        )
+        .whenKeyIsPressed(
+            88, function (screen) {
+                if (game.state.ammo > 0) {
+                    screen.getEntity('entity_map', 'map').addChild('entity_rocket', {
+                        type: 'rocket_player',
+                        x : this.xCenter,
+                        y : this.yCenter,
+                        speedX: 0.2 * Math.cos(this.module('module_physics').rotation),
+                        speedY: 0.2 * Math.sin(this.module('module_physics').rotation)
+                    })
+                    
+                    game.state.ammo --;
+                }
             }
         )
 })()

@@ -23,54 +23,50 @@
  */
 
 (function ( ) {
-    game.Module.define('module_pointUpdater')
+    game.Module.define('module_rocketUpdater')
         .data({
-            initialTTL: 90,
-            ttl: 90
+            ttl: 600,
+            speedX: 0,
+            speedY: 0
         })
         .onUpdate(function (entity, screen) {
             if (this.ttl <= 0) {
                 screen.removeEntity(entity);
             } else {
-                entity.sprite.alpha = this.ttl / this.initialTTL;
+                entity.x += this.speedX;
+                entity.y += this.speedY;
                 this.ttl--;
             }
         })
 
-    game.Entity.define('entity_pointOnRadar')
+    game.Entity.define('entity_rocket')
         .modules([
-            'module_pointUpdater'
+            'module_rocketUpdater',
+            'module_type',
         ])
-        .spriteDelta(-15, -15)
-        .sprite('sprite_pointOnRadar')
+            .updateAnyways()
+        .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
+            widht: 0,
+            height: 0
+        })
         .onCreate(function (args) {
-            this.sprite.stop();
-            switch (args.type) {
-                default:
-                case 'rocket_player':
-                    this.sprite.frame = 1
-                    break;
-                case 'mine':
-                    this.sprite.frame = 4;
-                    break;
-                case 'rock':
-                    this.sprite.frame = 5;
-                    break;
-                case 'upgrade':
-                    this.sprite.frame = 6;
-                    break;
-                case 'armor':
-                    this.sprite.frame = 7;
-                    break;
-                case 'ammos':
-                    this.sprite.frame = 8;
-                    break;
-                case 'fuel':
-                    this.sprite.frame = 9;
-                    break;
+            if (args.type === 'rocket_player') {
+                this.width = 45;
+                this.height = 45;
+            } else {
+                this.width = 15;
+                this.height = 15;
             }
-            this.x = args.x;
-            this.y = args.y;
+            this.module('module_type').type = args.type;
+            
+            this.x = args.x - this.width / 2;
+            this.y = args.y - this.height / 2;
+            this.module('module_rocketUpdater').speedX = args.speedX;
+            this.module('module_rocketUpdater').speedY = args.speedY;
+        })
+        .whenHitsEntities(['entity_mine'], function (mine, screen) {
+            screen.removeEntity(mine);
+            screen.removeEntity(this);
         })
 })()
 
