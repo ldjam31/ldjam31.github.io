@@ -131,7 +131,7 @@
                         ((player.y < 10) ? '0' : '') + 
                         ~~player.y;
                     
-                compass.sprite.rotation = (player.module('module_physics').rotation - Math.PI / 2);
+                compass.sprite.rotation = player.module('module_physics').rotation * 1 - Math.PI * 1/2;
             }
         });
 

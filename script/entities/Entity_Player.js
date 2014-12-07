@@ -63,13 +63,13 @@
         )
         .whenKeyIsPressed(
             37, function (s, game) { //left
-                this.module('module_physics').rotationAcceleration += 0.05;
+                this.module('module_physics').rotationAcceleration -= 0.05;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
         .whenKeyIsPressed(
             39, function (s, game) { //right
-                this.module('module_physics').rotationAcceleration -= 0.05;
+                this.module('module_physics').rotationAcceleration += 0.05;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForRotationAcceleration);
             }
         )
