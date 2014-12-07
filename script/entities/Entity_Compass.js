@@ -23,34 +23,13 @@
  */
 
 !(function () {
-    var assets = [
-        {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/Board.png'},
-        {type: Cassava.Assets.IMAGE, name: 'glass', src: './assets/img/Glass.png'},
-        {type: Cassava.Assets.IMAGE, name: 'pointOnRadar', src: './assets/img/icons.png'},
-        {type: Cassava.Assets.IMAGE, name: 'charactersDigit', src: './assets/img/Digits.png'},
-        {type: Cassava.Assets.IMAGE, name: 'shattering', src: './assets/img/shattering.png'},
-        {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'}
-    ];
-
-    var initialArmor = 100;
-    var initialFuel = 100;
-    var initialO2 = 100;
-    var initialAmmo = 5;
-    var ammoMax = 10;
-
-    game.initialState({
-        ammo: initialAmmo,
-        ammoMax: ammoMax,
-        armor: initialArmor,
-        armorMax: initialArmor,
-        fuel: initialFuel,
-        fuelMax: initialFuel,
-        o2: initialO2,
-        o2Max: initialO2,
-        time: 0
-    });
-
-    game.assets(assets)
-        .background('#007224')
-        .startAtScreen('screen_game');
-})()
+    game.Entity.define('entity_compass')
+        .onCreate(function (args) {
+            this.id = 'compass';
+            this.z = 2;
+            this.x = args.x;
+            this.y = args.y;
+        })
+        .spriteDelta(-50, -50)
+        .sprite('sprite_compass');
+})();

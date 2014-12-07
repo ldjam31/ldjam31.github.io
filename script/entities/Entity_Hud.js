@@ -28,7 +28,7 @@
     
     game.Module.define('module_hudUpdater')
         .onUpdate(function (entity, screen, game) {
-            var sentence, player, seconds, minutes, hours;
+            var sentence, player, seconds, minutes, hours, compass;
         
             sentence = entity.child('armor');
             if (!sentence) {
@@ -110,9 +110,16 @@
                     y: 537
                 })
             }
+
+            compass = entity.child('compass');
+            if (!compass) {
+                compass = entity.addChild('entity_compass', {
+                    x: 714,
+                    y:61
+                })
+            }
             
             player = screen.getEntity('entity_player', 'player');
-            
             if (player) {
                 sentence.module('module_sentenceDigit')
                     .sentence = 
@@ -123,10 +130,9 @@
                         ((player.y < 100) ? '0' : '') + 
                         ((player.y < 10) ? '0' : '') + 
                         ~~player.y;
+                    
+                compass.sprite.rotation = (player.module('module_physics').rotation - Math.PI / 2);
             }
-            
-            
-            
         });
 
     game.Entity.define('entity_hud')
