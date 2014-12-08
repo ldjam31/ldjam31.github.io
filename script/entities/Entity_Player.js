@@ -76,7 +76,7 @@
         .whenKeyIsPressed(
             88, function (screen) {
                 if (game.state.ammo > 0) {
-                    screen.getEntity('entity_map', 'map').addChild('entity_rocket', {
+                    screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
                         type: 'rocket_player',
                         x : this.xCenter,
                         y : this.yCenter,
