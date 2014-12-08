@@ -64,7 +64,13 @@
                 case 'rock':
                     this.sprite.frame = 5;
                     break;
-                case 'upgrade':
+                case 'upgrade_armour':
+                case 'upgrade_fuel':
+                case 'upgrade_ammo':
+                case 'upgrade_o2':
+                case 'upgrade_rocketDmg':
+                case 'upgrade_radarRange':
+                case 'upgrade_radarFrequence':
                     this.sprite.frame = 6;
                     break;
                 case 'armour':

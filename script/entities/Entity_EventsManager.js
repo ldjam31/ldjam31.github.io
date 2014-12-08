@@ -44,12 +44,22 @@ var EVENT_ICON = {
         'armour'
     ];
 
+    var EVENTS_UPGRADE = [
+        'upgrade_armour',
+        'upgrade_fuel',
+        'upgrade_ammo',
+        'upgrade_o2',
+        'upgrade_rocketDmg',
+        'upgrade_radarRange',
+        'upgrade_radarFrequence'
+    ];
+
     var MIN_EVENTS_UPGRADE_CD = 7200;
     var MAX_EVENTS_UPGRADE_CD = 8000;
-    var MIN_EVENTS_SUBMARINE_CD = 2000;
-    var MAX_EVENTS_SUBMARINE_CD = 3000;
-    var MIN_EVENTS_ITEM_CD = 1000;
-    var MAX_EVENTS_ITEM_CD = 2000;
+    var MIN_EVENTS_SUBMARINE_CD = 3000;
+    var MAX_EVENTS_SUBMARINE_CD = 4000;
+    var MIN_EVENTS_ITEM_CD = 1500;
+    var MAX_EVENTS_ITEM_CD = 2500;
     var MIN_EVENTS_TEXT_CD = 24000;
     var MAX_EVENTS_TEXT_CD = 36000;
 //    var MIN_EVENTS_CD = 540;
@@ -72,7 +82,7 @@ var EVENT_ICON = {
     game.Module.define('module_eventsManagerUpdater')
         .data({
             textColdDown: MIN_EVENTS_TEXT_CD,
-            itemColdDown: MIN_EVENTS_ITEM_CD,
+            itemColdDown: 1,
             submarineColdDown: MIN_EVENTS_SUBMARINE_CD,
             upgradeColdDown: MIN_EVENTS_UPGRADE_CD
         })
@@ -147,7 +157,7 @@ var EVENT_ICON = {
                         s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
                         s = (s < 10) ? '0' + s : s;
                         logger.module('module_logUpdater').logsBuffer.push(
-                            '/s ' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            '/s' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
                             );
                         cell.addChild('entity_submarine', {
                             x: x,
@@ -163,7 +173,32 @@ var EVENT_ICON = {
             }
 
             if (this.upgradeColdDown <= 0) {
-
+                player = screen.getEntity('entity_player', 'player');
+                logger = screen.getEntity('entity_log', 'log');
+                if (player && logger) {
+                    dist = ~~(1 + Math.random() * (MAX_SPAWN_DIST - MIN_SPAWN_DIST + 1)) + MIN_SPAWN_DIST;
+                    angle = Math.random() * Math.PI * 2;
+                    x = ~~(player.x + dist * Math.cos(angle));
+                    y = ~~(player.y + dist * Math.sin(angle));
+                    cell = screen.getEntity('entity_cell', 'cell_' + ~~(x * 10 / (MAP_LIMITS)) + '_' + ~~(y * 10 / (MAP_LIMITS)));
+                    if (cell) {
+                        ttl = ~~(1 + Math.random() * (MAX_TTL - MIN_TTL + 1)) + MIN_TTL;
+                        event = EVENTS_UPGRADE[~~(Math.random() * EVENTS_UPGRADE.length)];
+                        m = ~~((game.state.time + ttl) % 216000 / 3600);
+                        m = (m < 10) ? '0' + m : m;
+                        s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
+                        s = (s < 10) ? '0' + s : s;
+                        logger.module('module_logUpdater').logsBuffer.push(
+                            '/u' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            );
+                        cell.addChild('entity_bonus', {
+                            type: event,
+                            x: x,
+                            y: y,
+                            ttl: ttl
+                        })
+                    }
+                }
                 this.upgradeColdDown = ~~(1 + Math.random() * (MAX_EVENTS_UPGRADE_CD - MIN_EVENTS_UPGRADE_CD + 1)) + MIN_EVENTS_UPGRADE_CD;
             } else {
                 this.upgradeColdDown--;

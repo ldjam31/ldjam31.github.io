@@ -41,8 +41,10 @@
     var O2_MAX = 100;
     var INITIAL_AMMO = 3;
     var AMMO_MAX = 5;
-    var ROCKET_DAMAGES = 20;
+    var ROCKET_DAMAGES = 15;
     var ROCKET_SPEED = 0.1;
+    var RADAR_FREQUENCE = 90;
+    var RADAR_RANGE = 120;
 
     game.initialState({
         ammo: INITIAL_AMMO,
@@ -58,7 +60,9 @@
         fuelMax: FUEL_MAX,
         o2: INITIAL_O2,
         o2Max: O2_MAX,
-        time: 0
+        time: 0,
+        radarRange: RADAR_RANGE,
+        radarFrequence: RADAR_FREQUENCE
     });
 
     game.assets(assets)

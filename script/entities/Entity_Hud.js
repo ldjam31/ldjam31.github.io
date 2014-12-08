@@ -93,7 +93,7 @@
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
                     id: 'time',
-                    sentence: '00:00:00',
+                    sentence: '00:00',
                     character: DIGIT,
                     characterWidth: DIGIT_WIDTH,
                     characterHeight: DIGIT_HEIGHT,

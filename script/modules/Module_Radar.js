@@ -34,7 +34,7 @@
             initialColdDown: 90,
             coldDown: 0
         })
-        .onUpdate(function (e, screen) {
+        .onUpdate(function (e, screen, game) {
             var player, map, nodeScannable, distX, distY,
                 dist, rotation, cosRotation, sinRotation, 
                 playerXCenter, playerYCenter, radarScreen;
@@ -72,10 +72,10 @@
                         nodeCell = nodeCell.next;
                     }
                     
-                    if (this.rangeOut >= this.maxRange) {
+                    if (this.rangeOut >= game.state.radarRange) {
                         this.rangeOut = this.rangeSize;
                         this.rangeIn = 0;
-                        this.coldDown = this.initialColdDown;
+                        this.coldDown = game.state.radarFrequence;
                     } else {
                         this.rangeOut += this.rangeSize;
                         this.rangeIn += this.rangeSize;
