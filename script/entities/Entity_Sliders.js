@@ -33,19 +33,21 @@
     var FUEL_REQUIRED_FOR_ACCELERATION_FRONT = 0.005;
     var FUEL_REQUIRED_FOR_ACCELERATION_BACK = 0.01;
     var FUEL_REQUIRED_FOR_ROTATION_ACCELERATION = 0.005;
+	
+	var HANDLE_DEAD_ZONE = 6;
 
     game.Module.define('module_speedSliderUpdater')
         .onUpdate(function (slider, screen) {
             var player = screen.getEntity('entity_player', 'player');
 
             if (player) {
-                if (306 - slider.y < 0) {
+                if (306 - slider.y < -HANDLE_DEAD_ZONE) {
                     if (player.module('module_physics').speed > PLAYER_MAX_SPEED * (306 - slider.y) / 80) {
                         player.module('module_physics').acceleration = - MAX_ACCELERATION_BACK;
                     }
                     game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION_BACK * Math.abs(306 - slider.y) / 80);
                 }
-                if (306 - slider.y > 0) {
+                if (306 - slider.y > HANDLE_DEAD_ZONE) {
                     if (player.module('module_physics').speed < PLAYER_MAX_SPEED * (306 - slider.y) / 80) {
                         player.module('module_physics').acceleration = MAX_ACCELERATION_FRONT;
                     }

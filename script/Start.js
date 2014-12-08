@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-//var FX_VOLUME = 0.05;
-//var MUSIC_VOLUME = 0.8;
-var FX_VOLUME = 0;
-var MUSIC_VOLUME = 0;
+var FX_VOLUME = 0.05;
+var MUSIC_VOLUME = 0.8;
+// var FX_VOLUME = 0;
+// var MUSIC_VOLUME = 0;
 
 !(function () {
     var assets = [
