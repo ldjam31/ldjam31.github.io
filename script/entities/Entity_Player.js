@@ -51,6 +51,9 @@
         })
         .whenHitsEntities(['entity_rocket'], function (rocket, screen) {
             if (rocket.module('module_type').type === 'rocket_enemy') {
+                screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newTTL = 45; 
+                screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newIntensity = 9; 
+
                 game.Audio.channel('hit').play('hitA').volume = FX_VOLUME;
                 game.state.invincibility = 60;
                 game.state.armour -= rocket.module('module_rocketUpdater').damages;

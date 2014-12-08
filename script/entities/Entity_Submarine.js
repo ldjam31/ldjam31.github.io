@@ -108,6 +108,8 @@
         })
         .whenHitsEntities(['entity_player'], function (player, screen) {
             if (game.state.invincibility === 0) {
+                screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newTTL = 45; 
+                screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newIntensity = 10;
                 game.state.invincibility = 60;
                 game.state.armour -= player.module('module_physics').speed * 30 + 5;
                 if (this.module('module_submarineUpdater').invincibility <= 0) {

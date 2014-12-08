@@ -35,6 +35,8 @@
         })
         .whenHitsEntities(['entity_player'], function (player, screen, game) {
             if (game.state.invincibility === 0) {
+                screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newTTL = 45; 
+                screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newIntensity = 11; 
                 game.Audio.channel('hit').play((Math.random() > 0.5) ? 'hitA' : 'hitB').volume = FX_VOLUME;
                 game.state.invincibility = 60;
                 game.state.armour -= player.module('module_physics').speed * 20 + 15;
