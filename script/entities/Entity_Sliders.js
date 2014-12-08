@@ -24,8 +24,8 @@
 
 (function ( ) {
     var PLAYER_MAX_SPEED = 0.2;
-    var PLAYER_MAX_ROTATION_SPEED = Math.PI/200;
-    
+    var PLAYER_MAX_ROTATION_SPEED = Math.PI / 200;
+
     var MAX_ACCELERATION_FRONT = 0.00072;
     var MAX_ACCELERATION_BACK = 0.0005;
     var MAX_ACCELERATION_ROTATION = 0.0008;
@@ -33,25 +33,27 @@
     var FUEL_REQUIRED_FOR_ACCELERATION_FRONT = 0.005;
     var FUEL_REQUIRED_FOR_ACCELERATION_BACK = 0.01;
     var FUEL_REQUIRED_FOR_ROTATION_ACCELERATION = 0.005;
-	
-	var HANDLE_DEAD_ZONE = 6;
+
+    var HANDLE_DEAD_ZONE = 6;
 
     game.Module.define('module_speedSliderUpdater')
         .onUpdate(function (slider, screen) {
-            var player = screen.getEntity('entity_player', 'player');
+            if (game.state.fuel) {
+                var player = screen.getEntity('entity_player', 'player');
 
-            if (player) {
-                if (306 - slider.y < -HANDLE_DEAD_ZONE) {
-                    if (player.module('module_physics').speed > PLAYER_MAX_SPEED * (306 - slider.y) / 80) {
-                        player.module('module_physics').acceleration = - MAX_ACCELERATION_BACK;
+                if (player) {
+                    if (306 - slider.y < -HANDLE_DEAD_ZONE) {
+                        if (player.module('module_physics').speed > PLAYER_MAX_SPEED * (306 - slider.y) / 80) {
+                            player.module('module_physics').acceleration = -MAX_ACCELERATION_BACK;
+                        }
+                        game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION_BACK * Math.abs(306 - slider.y) / 80);
                     }
-                    game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION_BACK * Math.abs(306 - slider.y) / 80);
-                }
-                if (306 - slider.y > HANDLE_DEAD_ZONE) {
-                    if (player.module('module_physics').speed < PLAYER_MAX_SPEED * (306 - slider.y) / 80) {
-                        player.module('module_physics').acceleration = MAX_ACCELERATION_FRONT;
+                    if (306 - slider.y > HANDLE_DEAD_ZONE) {
+                        if (player.module('module_physics').speed < PLAYER_MAX_SPEED * (306 - slider.y) / 80) {
+                            player.module('module_physics').acceleration = MAX_ACCELERATION_FRONT;
+                        }
+                        game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION_FRONT * Math.abs(306 - slider.y) / 80);
                     }
-                    game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION_FRONT * Math.abs(306 - slider.y) / 80);
                 }
             }
         });
@@ -82,22 +84,24 @@
 
     game.Module.define('module_rotationSliderUpdater')
         .onUpdate(function (slider, screen) {
-            var player = screen.getEntity('entity_player', 'player');
+            if (game.state.fuel) {
+                var player = screen.getEntity('entity_player', 'player');
 
-            if (player) {
-                if (player.module('module_physics').rotationSpeed < PLAYER_MAX_ROTATION_SPEED * (slider.x - 672) / 60) {
-                    player.module('module_physics').rotationAcceleration = + MAX_ACCELERATION_ROTATION;
-                } else if (player.module('module_physics').rotationSpeed > PLAYER_MAX_ROTATION_SPEED * (slider.x - 672) / 60){
-                    player.module('module_physics').rotationAcceleration = - MAX_ACCELERATION_ROTATION;
+                if (player) {
+                    if (player.module('module_physics').rotationSpeed < PLAYER_MAX_ROTATION_SPEED * (slider.x - 672) / 60) {
+                        player.module('module_physics').rotationAcceleration = +MAX_ACCELERATION_ROTATION;
+                    } else if (player.module('module_physics').rotationSpeed > PLAYER_MAX_ROTATION_SPEED * (slider.x - 672) / 60) {
+                        player.module('module_physics').rotationAcceleration = -MAX_ACCELERATION_ROTATION;
+                    }
+                    game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ROTATION_ACCELERATION * Math.abs(672 - slider.x) / 60);
                 }
-                game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ROTATION_ACCELERATION * Math.abs(672 - slider.x) / 60);
             }
-            
-            if (slider.x > 672) {
-                slider.x = Cassava.fixedFloat(slider.x - 1);
-            } else if (slider.x < 672){
-                slider.x = Cassava.fixedFloat(slider.x + 1);
-            }
+
+                if (slider.x > 672) {
+                    slider.x = Cassava.fixedFloat(slider.x - 1);
+                } else if (slider.x < 672) {
+                    slider.x = Cassava.fixedFloat(slider.x + 1);
+                }
         })
 
 
