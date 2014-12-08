@@ -88,6 +88,8 @@
                 log = screen.getEntity('entity_log', 'log');
                 
                 if (player) {
+                    screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newTTL = 90; 
+                    screen.getEntity('entity_shaker', 'shaker').module('module_shaking').newIntensity = 3; 
                     game.Audio.channel('torpedo').play('torpedo');
                     
                     screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {

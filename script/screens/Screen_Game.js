@@ -42,12 +42,13 @@
             {type: 'entity_speedSlider'},
             {type: 'entity_rotationSlider'},
             {type: 'entity_fireButton'},
-            {type: 'entity_refillButton'}
+            {type: 'entity_refillButton'},
+            {type: 'entity_shaker'}
         ])
         .postEventModules([
             'module_radar',
             'module_statsUpdater',
-            'module_soundsManager',
+            'module_soundsManager'
         ])
         .onCreate(function () {
             game.Audio.channel('sonar').volume = FX_VOLUME;
