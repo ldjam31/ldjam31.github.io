@@ -34,6 +34,8 @@ var MUSIC_VOLUME = 0.8;
         {type: Cassava.Assets.IMAGE, name: 'charactersFont', src: './assets/img/Font.png'},
         {type: Cassava.Assets.IMAGE, name: 'shattering', src: './assets/img/shattering.png'},
         {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'},
+        {type: Cassava.Assets.IMAGE, name: 'fireButton', src: './assets/img/FireOn.png'},
+        {type: Cassava.Assets.IMAGE, name: 'refillButton', src: './assets/img/RefillOn.png'},
         {type: Cassava.Assets.AUDIO, name: 'ambient', src: './assets/snd/Ambient.ogg'},
         {type: Cassava.Assets.AUDIO, name: 'bonus', src: './assets/snd/Bonus.wav'},
         {type: Cassava.Assets.AUDIO, name: 'end', src: './assets/snd/End.ogg'},

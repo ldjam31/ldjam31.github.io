@@ -82,24 +82,25 @@
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ROTATION_ACCELERATION);
             }
         )
-        .whenKeyIsPressed(
-            88, function (screen, game) {
-                if (game.state.ammo > 0 && game.state.rocketReload <= 0) {
-                    game.Audio.channel('torpedo').play('torpedo');
-                    screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
-                        type: 'rocket_player',
-                        x: this.xCenter,
-                        y: this.yCenter,
-                        speedX: game.state.rocketSpeed * Math.cos(this.module('module_physics').rotation),
-                        speedY: game.state.rocketSpeed * Math.sin(this.module('module_physics').rotation),
-                        damages: game.state.rocketDamages,
-                    })
-
-                    game.state.rocketReload = game.state.initialRocketReload;
-                    game.state.ammo--;
-                }
-            }
-        )
+// DEBUG ONLY :D
+//        .whenKeyIsPressed(
+//            88, function (screen, game) {
+//                if (game.state.ammo > 0 && game.state.rocketReload <= 0) {
+//                    game.Audio.channel('torpedo').play('torpedo');
+//                    screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
+//                        type: 'rocket_player',
+//                        x: this.xCenter,
+//                        y: this.yCenter,
+//                        speedX: game.state.rocketSpeed * Math.cos(this.module('module_physics').rotation),
+//                        speedY: game.state.rocketSpeed * Math.sin(this.module('module_physics').rotation),
+//                        damages: game.state.rocketDamages,
+//                    })
+//
+//                    game.state.rocketReload = game.state.initialRocketReload;
+//                    game.state.ammo--;
+//                }
+//            }
+//        )
         .whenHitsEntities(['entity_rocket'], function (rocket, screen) {
             if (rocket.module('module_type').type === 'rocket_enemy') {
                 game.Audio.channel('hit').play('hitA').volume = FX_VOLUME;
