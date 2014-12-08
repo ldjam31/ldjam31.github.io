@@ -61,6 +61,7 @@
             width: 20,
             height: 20
         })
+        .updateAnyways()
         .onCreate(function (args) {
             this.module('module_type').type = args.type;
             this.module('module_type').value = args.value || 0;

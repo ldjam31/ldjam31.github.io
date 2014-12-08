@@ -62,8 +62,6 @@ var EVENT_ICON = {
     var MAX_EVENTS_ITEM_CD = 2500;
     var MIN_EVENTS_TEXT_CD = 24000;
     var MAX_EVENTS_TEXT_CD = 36000;
-//    var MIN_EVENTS_CD = 540;
-//    var MAX_EVENTS_CD = 1080;
     var MIN_SPAWN_DIST = 200;
     var MAX_SPAWN_DIST = 350;
 
