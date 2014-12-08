@@ -80,14 +80,16 @@
             this.y = 500;
         })
         .whenPointed(function (e, screen, game) {
-            var player;
+            var player, log;
             this.module('module_buttonPressing').isPressed = true;
             
             if (game.state.ammo > 0 && game.state.rocketReload <= 0) {
                 player = screen.getEntity('entity_player', 'player');
+                log = screen.getEntity('entity_log', 'log');
                 
                 if (player) {
                     game.Audio.channel('torpedo').play('torpedo');
+                    
                     screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
                         type: 'rocket_player',
                         x: player.xCenter,
@@ -99,8 +101,10 @@
 
                     game.state.rocketReload = game.state.initialRocketReload;
                     game.state.ammo--;
+                    if (log) {
+                        log.module('module_logUpdater').logsBuffer.push('/a left: ' + game.state.ammo);
+                    }
                 }
             }
         });
-
 })()
