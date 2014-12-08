@@ -57,7 +57,7 @@
             
             switch (type.type) {
                 case'ammo':
-                case'armor':
+                case'armour':
                 case'fuel':
                     game.state[type.type] += type.value;
                     if (game.state[type.type] > game.state[type.type + 'Max']) {

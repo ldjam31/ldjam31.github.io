@@ -34,10 +34,10 @@
         .onUpdate(function (entity, screen, game) {
             var sentence, player, seconds, minutes, hours, compass;
         
-            sentence = entity.child('armor');
+            sentence = entity.child('armour');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
-                    id: 'armor',
+                    id: 'armour',
                     sentence: '100',
                     character: DIGIT,
                     characterWidth: DIGIT_WIDTH,
@@ -48,9 +48,9 @@
             }
             sentence.module('module_sentence')
                 .sentence = 
-                    (game.state.armor < 100 ? '0' : '') +
-                    (game.state.armor < 10 ? '0' : '') +
-                    ~~game.state.armor;
+                    (game.state.armour < 100 ? '0' : '') +
+                    (game.state.armour < 10 ? '0' : '') +
+                    ~~game.state.armour;
 
             
             sentence = entity.child('o2');

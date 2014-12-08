@@ -49,8 +49,14 @@
             this.sprite.stop();
             switch (args.type) {
                 default:
+                case 'rocket_enemy':
+                    this.sprite.frame = 0
+                    break;
                 case 'rocket_player':
-                    this.sprite.frame = 1
+                    this.sprite.frame = 1;
+                    break;
+                case 'submarine':
+                    this.sprite.frame = 2;
                     break;
                 case 'mine':
                     this.sprite.frame = 4;
@@ -61,7 +67,7 @@
                 case 'upgrade':
                     this.sprite.frame = 6;
                     break;
-                case 'armor':
+                case 'armour':
                     this.sprite.frame = 7;
                     break;
                 case 'ammo':

@@ -36,7 +36,7 @@
         .whenHitsEntities(['entity_player'], function (player, screen, game) {
             if (game.state.invincibility === 0) {
                 game.state.invincibility = 60;
-                game.state.armor -= player.module('module_physics').speed * 20;
+                game.state.armour -= player.module('module_physics').speed * 20 + 15;
                 screen.removeEntity(this);
             }
         })

@@ -33,24 +33,31 @@
         {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'},
     ];
 
-    var initialArmor = 100;
-    var initialFuel = 100;
-    var initialO2 = 100;
-    var initialAmmo = 0;
-    var ammoMax = 5;
+    var INITIAL_ARMOUR = 100;
+    var ARMOUR_MAX = 100;
+    var INITIAL_FUEL = 100;
+    var FUEL_MAX = 100;
+    var INITIAL_O2 = 100;
+    var O2_MAX = 100;
+    var INITIAL_AMMO = 3;
+    var AMMO_MAX = 5;
+    var ROCKET_DAMAGES = 20;
+    var ROCKET_SPEED = 0.1;
 
     game.initialState({
-        ammo: initialAmmo,
-        ammoMax: ammoMax,
-//        armor: initialArmor,
+        ammo: INITIAL_AMMO,
+        ammoMax: AMMO_MAX,
+        rocketDamages: ROCKET_DAMAGES,
+        rocketSpeed: ROCKET_SPEED,
+//        armour: initialArmour,
         invincibility: 0,
-        armor: 67,
-        armorMax: initialArmor,
+        armour: INITIAL_ARMOUR,
+        armourMax: ARMOUR_MAX,
 //        fuel: initialFuel,
-        fuel: 78,
-        fuelMax: initialFuel,
-        o2: initialO2,
-        o2Max: initialO2,
+        fuel: INITIAL_FUEL,
+        fuelMax: FUEL_MAX,
+        o2: INITIAL_O2,
+        o2Max: O2_MAX,
         time: 0
     });
 

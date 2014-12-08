@@ -98,7 +98,13 @@
         w: 70,
         x: 71,
         y: 72,
-        z: 73
+        z: 73,
+        upgrade: 74,
+        armour: 75,
+        ammo: 76,
+        fuel: 77,
+        o2: 78,
+        submarine: 79
     };
 
     game.Module.define('module_sentence')
@@ -160,7 +166,35 @@
                             frame = Characters.comma;
                             break;
                         case '\/':
-                            frame = Characters.slash;
+                            switch (this.sentence[i+1]) {
+                                case 'u' :
+                                    i++;
+                                    frame = Characters.upgrade;
+                                    break
+                                case 'h' :
+                                    i++;
+                                    frame = Characters.armour;
+                                    break;
+                                case 'a' :
+                                    i++;
+                                    frame = Characters.ammo;
+                                    break;
+                                case 'f' :
+                                    i++;
+                                    frame = Characters.fuel;
+                                    break;
+                                case 'o' :
+                                    i++;
+                                    frame = Characters.o2;
+                                    break;
+                                case 's' :
+                                    i++;
+                                    frame = Characters.submarine;
+                                    break;
+                                default:
+                                    frame = Characters.slash;
+                                    break;
+                            }
                             break;
                         default:
                             frame = Characters[this.sentence[i]];

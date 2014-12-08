@@ -37,7 +37,7 @@
             game.state.o2 -= this.o2Decreasing;
             game.state.time ++;
             
-            game.state.armor = (game.state.armor < 0) ? 0 : game.state.armor;
+            game.state.armour = (game.state.armour < 0) ? 0 : game.state.armour;
             game.state.fuel = (game.state.fuel < 0) ? 0 : game.state.fuel;
             game.state.o2 = (game.state.o2 < 0) ? 0 : game.state.o2;
         })

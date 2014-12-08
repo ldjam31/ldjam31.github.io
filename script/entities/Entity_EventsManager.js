@@ -23,6 +23,12 @@
  */
 
 (function ( ) {
+    var EVENT_ICON = {
+        ammo: '/a',
+        fuel: '/f',
+        armour: '/h'
+    };
+    
     var EVENTS_TEXT = [
         "Hello robert ! :D",
         "Je test des trucs ptain",
@@ -35,7 +41,7 @@
         'ammo',
         'fuel',
         'fuel',
-        'armor'
+        'armour'
     ];
 
 //    var MIN_EVENTS_CD = 5400;
@@ -52,8 +58,8 @@
     var MIN_SPAWN_ITEM_DIST = 300;
     var MAX_SPAWN_ITEM_DIST = 400;
 
-    var MIN_ARMOR = 10;
-    var MAX_ARMOR = 40;
+    var MIN_ARMOUR = 10;
+    var MAX_ARMOUR = 40;
     var MIN_FUEL = 20;
     var MAX_FUEL = 60;
     var MIN_AMMO = 1;
@@ -102,8 +108,8 @@
                                         case 'fuel':
                                             value = ~~(1 + Math.random() * (MAX_FUEL - MIN_FUEL + 1)) + MIN_FUEL;
                                             break;
-                                        case 'armor':
-                                            value = ~~(1 + Math.random() * (MAX_ARMOR - MIN_ARMOR + 1)) + MIN_ARMOR;
+                                        case 'armour':
+                                            value = ~~(1 + Math.random() * (MAX_ARMOUR - MIN_ARMOUR + 1)) + MIN_ARMOUR;
                                             break;
                                     }
                                     value = ~~(1 + Math.random() * (ITEM_MAX_TTL - ITEM_MIN_TTL + 1)) + ITEM_MIN_TTL;
@@ -113,7 +119,7 @@
                                     m = ~~((game.state.time + ttl) % 216000 / 3600);
                                     m = (m < 10) ? '0' + m : m;
                                     logger.module('module_logUpdater').logsBuffer.push(
-                                        event + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + h + ':' + m
+                                        EVENT_ICON[event] + ' at ' + x + '.' + (MAP_LIMITS - y) + ' before ' + h + ':' + m
                                     );
                                     cell.addChild('entity_bonus', {
                                         type: event,

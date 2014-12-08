@@ -23,9 +23,13 @@
  */
 
 (function ( ) {
+    var PLAYER_ROCKET_SIZE = 15;
+    var ENEMY_ROCKET_SIZE = 5;
+    var ROCKET_TTL = 1200;
+    
     game.Module.define('module_rocketUpdater')
         .data({
-            ttl: 600,
+            ttl: ROCKET_TTL,
             speedX: 0,
             speedY: 0
         })
@@ -51,18 +55,19 @@
         })
         .onCreate(function (args) {
             if (args.type === 'rocket_player') {
-                this.width = 45;
-                this.height = 45;
+                this.width = PLAYER_ROCKET_SIZE;
+                this.height = PLAYER_ROCKET_SIZE;
             } else {
-                this.width = 15;
-                this.height = 15;
+                this.width = ENEMY_ROCKET_SIZE;
+                this.height = ENEMY_ROCKET_SIZE;
             }
             this.module('module_type').type = args.type;
             
             this.x = args.x - this.width / 2;
             this.y = args.y - this.height / 2;
-            this.module('module_rocketUpdater').speedX = args.speedX;
-            this.module('module_rocketUpdater').speedY = args.speedY;
+            this.module('module_rocketUpdater').speedX  = args.speedX;
+            this.module('module_rocketUpdater').speedY  = args.speedY;
+            this.module('module_rocketUpdater').damages = args.damages;
         })
         .whenHitsEntities(['entity_mine'], function (mine, screen) {
             screen.removeEntity(mine);

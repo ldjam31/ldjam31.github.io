@@ -47,7 +47,7 @@
             this.id = 'player';
             this.x = args.x;
             this.y = args.y;
-            this.module('module_physics').rotation = - Math.PI / 2;
+            this.module('module_physics').rotation = -Math.PI / 2;
         })
         .whenKeyIsPressed(
             38, function (s, game) { //up
@@ -78,14 +78,22 @@
                 if (game.state.ammo > 0) {
                     screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
                         type: 'rocket_player',
-                        x : this.xCenter,
-                        y : this.yCenter,
-                        speedX: 0.2 * Math.cos(this.module('module_physics').rotation),
-                        speedY: 0.2 * Math.sin(this.module('module_physics').rotation)
+                        x: this.xCenter,
+                        y: this.yCenter,
+                        speedX: game.state.rocketSpeed * Math.cos(this.module('module_physics').rotation),
+                        speedY: game.state.rocketSpeed * Math.sin(this.module('module_physics').rotation),
+                        damages: game.state.rocketDamages,
                     })
-                    
-                    game.state.ammo --;
+
+                    game.state.ammo--;
                 }
             }
         )
+        .whenHitsEntities(['entity_rocket'], function (rocket, screen) {
+            if (rocket.module('module_type').type === 'rocket_enemy') {
+                game.state.invincibility = 60;
+                game.state.armour -= rocket.module('module_rocketUpdater').damages;
+                screen.removeEntity(rocket);
+            }
+        })
 })()

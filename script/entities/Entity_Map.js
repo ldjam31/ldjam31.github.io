@@ -65,7 +65,16 @@
                             y: originY + ~~(Math.random() * CELL_SIZE)
                         })
                     }
+
                 }
             }
+            //TEST
+            cell.addChild('entity_submarine', {
+                x: 400,
+                y: 400,
+                ttl: Infinity,
+                level: 1
+            })
+            //---
         })
 })()
