@@ -85,10 +85,16 @@
             if (player) {
                 if (player.module('module_physics').rotationSpeed < PLAYER_MAX_ROTATION_SPEED * (slider.x - 672) / 60) {
                     player.module('module_physics').rotationAcceleration = + MAX_ACCELERATION_ROTATION;
-                } else {
+                } else if (player.module('module_physics').rotationSpeed > PLAYER_MAX_ROTATION_SPEED * (slider.x - 672) / 60){
                     player.module('module_physics').rotationAcceleration = - MAX_ACCELERATION_ROTATION;
                 }
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ROTATION_ACCELERATION * Math.abs(672 - slider.x) / 60);
+            }
+            
+            if (slider.x > 672) {
+                slider.x = Cassava.fixedFloat(slider.x - 1);
+            } else if (slider.x < 672){
+                slider.x = Cassava.fixedFloat(slider.x + 1);
             }
         })
 
