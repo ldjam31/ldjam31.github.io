@@ -34,6 +34,9 @@
             if (this.isPressed) {
                 entity.sprite.hide();
             } else {
+                if (entity.name === 'entity_refillButton') {
+                    game.Audio.channel('refill').stop();
+                }
                 entity.sprite.show();
             }
 
@@ -57,11 +60,14 @@
         .whenPointed(function (e, s, game) {
             this.module('module_buttonPressing').isPressed = true;
             if (game.state.fuel > 0) {
+                game.Audio.channel('refill').play('air').loop().volume = REFILL_VOLUME;
                 game.state.fuel -= REFILL_FUEL_COST_PER_FRAME;
                 game.state.o2 += REFILL_O2_REGEN_PER_FRAME;
                 if (game.state.o2 >= game.state.o2Max) {
                     game.state.o2 = game.state.o2Max;
                 }
+            } else {
+                game.Audio.channel('refill').stop();
             }
         });
 

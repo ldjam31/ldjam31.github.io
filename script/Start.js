@@ -24,6 +24,7 @@
 
 var FX_VOLUME = 0.05;
 var MUSIC_VOLUME = 0.8;
+var REFILL_VOLUME = 1;
 // var FX_VOLUME = 0;
 // var MUSIC_VOLUME = 0;
 
@@ -50,7 +51,8 @@ var MUSIC_VOLUME = 0.8;
         {type: Cassava.Assets.AUDIO, name: 'shatterA', src: './assets/snd/ShatterA.wav'},
         {type: Cassava.Assets.AUDIO, name: 'shatterB', src: './assets/snd/ShatterB.wav'},
         {type: Cassava.Assets.AUDIO, name: 'sonar', src: './assets/snd/Sonar.wav'},
-        {type: Cassava.Assets.AUDIO, name: 'torpedo', src: './assets/snd/Torpedo.wav'}
+        {type: Cassava.Assets.AUDIO, name: 'torpedo', src: './assets/snd/Torpedo.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'air', src: './assets/snd/Air.wav'}
     ];
 
 
@@ -99,5 +101,6 @@ var MUSIC_VOLUME = 0.8;
         .addChannel('torpedo')
         .addChannel('hit')
         .addChannel('musicAmbient')
-        .addChannel('musicEnd');
+        .addChannel('musicEnd')
+        .addChannel('refill');
 })()
