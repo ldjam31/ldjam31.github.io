@@ -84,7 +84,7 @@
         )
         .whenKeyIsPressed(
             88, function (screen, game) {
-                if (game.state.ammo > 0) {
+                if (game.state.ammo > 0 && game.state.rocketReload <= 0) {
                     game.Audio.channel('torpedo').play('torpedo');
                     screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
                         type: 'rocket_player',
@@ -95,6 +95,7 @@
                         damages: game.state.rocketDamages,
                     })
 
+                    game.state.rocketReload = game.state.initialRocketReload;
                     game.state.ammo--;
                 }
             }

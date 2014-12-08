@@ -36,6 +36,8 @@
                 
             game.state.o2 -= this.o2Decreasing;
             game.state.time ++;
+
+            game.state.rocketReload --;
             
             game.state.armour = (game.state.armour < 0) ? 0 : game.state.armour;
             game.state.fuel = (game.state.fuel < 0) ? 0 : game.state.fuel;

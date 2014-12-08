@@ -57,6 +57,7 @@ var MUSIC_VOLUME = 0.8;
     var AMMO_MAX = 5;
     var ROCKET_DAMAGES = 15;
     var ROCKET_SPEED = 0.1;
+    var ROCKET_RELOAD = 300;
     var RADAR_FREQUENCE = 90;
     var RADAR_RANGE = 120;
 
@@ -65,6 +66,8 @@ var MUSIC_VOLUME = 0.8;
         ammoMax: AMMO_MAX,
         rocketDamages: ROCKET_DAMAGES,
         rocketSpeed: ROCKET_SPEED,
+        initialRocketReload: ROCKET_RELOAD,
+        rocketReload: ROCKET_RELOAD,
         invincibility: 0,
         armour: INITIAL_ARMOUR,
         armourMax: ARMOUR_MAX,
