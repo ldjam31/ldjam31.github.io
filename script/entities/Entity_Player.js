@@ -74,8 +74,9 @@
             }
         )
         .whenKeyIsPressed(
-            88, function (screen) {
+            88, function (screen, game) {
                 if (game.state.ammo > 0) {
+                    game.Audio.channel('torpedo').play('torpedo');
                     screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
                         type: 'rocket_player',
                         x: this.xCenter,
@@ -91,6 +92,7 @@
         )
         .whenHitsEntities(['entity_rocket'], function (rocket, screen) {
             if (rocket.module('module_type').type === 'rocket_enemy') {
+                game.Audio.channel('hit').play('hitA').volume = FX_VOLUME;
                 game.state.invincibility = 60;
                 game.state.armour -= rocket.module('module_rocketUpdater').damages;
                 screen.removeEntity(rocket);

@@ -25,23 +25,51 @@
 (function ( ) {
     game.Module.define('module_shatteringUpdater')
         .onUpdate(function (entity, s, game) {
-            if (game.state.armour / game.state.armourMax < 0.20) {
+            if (game.state.armour < 20 && game.state.screenState === 3) {
+                game.state.screenState = 4;
+                game.Audio.channel('shatter').play('shatterB').volume = FX_VOLUME;
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 3;
-            } else if (game.state.armour / game.state.armourMax < 0.40) {
+            } else if (game.state.armour < 40 && game.state.screenState === 2) {
+                game.state.screenState = 3;
+                game.Audio.channel('shatter').play('shatterB').volume = FX_VOLUME;
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 2;
-            } else if (game.state.armour / game.state.armourMax < 0.60) {
+            } else if (game.state.armour < 60 && game.state.screenState === 1) {
+                game.state.screenState = 2;
+                game.Audio.channel('shatter').play('shatterA').volume = FX_VOLUME;
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 1;
-            } else if (game.state.armour / game.state.armourMax < 0.80) {
+            } else if (game.state.armour < 80 && game.state.screenState === 0) {
+                game.state.screenState = 1;
+                game.Audio.channel('shatter').play('shatterA').volume = FX_VOLUME;
                 entity.sprite.isVisible = true;
                 entity.sprite.frame = 0;
-            } else {
-                entity.sprite.isVisible = false;
+            }
+            
+            switch(game.state.screenState) {
+                case 4:
+                    entity.sprite.isVisible = true;
+                    entity.sprite.frame = 3;
+                    break;
+                case 3:
+                    entity.sprite.isVisible = true;
+                    entity.sprite.frame = 2;
+                    break;
+                case 2:
+                    entity.sprite.isVisible = true;
+                    entity.sprite.frame = 1;
+                    break;
+                case 1:
+                    entity.sprite.isVisible = true;
+                    entity.sprite.frame = 0;
+                    break;
+                default: 
+                    entity.sprite.isVisible = false;
+                    break;
             }
         })
-    
+
     game.Entity.define('entity_shattering')
         .sprite('sprite_shattering')
         .modules([

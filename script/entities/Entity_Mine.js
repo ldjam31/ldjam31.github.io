@@ -35,6 +35,7 @@
         })
         .whenHitsEntities(['entity_player'], function (player, screen, game) {
             if (game.state.invincibility === 0) {
+                game.Audio.channel('hit').play((Math.random() > 0.5) ? 'hitA' : 'hitB').volume = FX_VOLUME;
                 game.state.invincibility = 60;
                 game.state.armour -= player.module('module_physics').speed * 20 + 15;
                 screen.removeEntity(this);

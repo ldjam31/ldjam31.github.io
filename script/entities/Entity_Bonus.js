@@ -69,11 +69,13 @@
             this.x = args.x;
             this.y = args.y;
         })
-        .whenHitsEntities(['entity_player'], function (player, screen) {
+        .whenHitsEntities(['entity_player'], function (player, screen, game) {
             var type = this.module('module_type');
             var log, info;
 
             log = screen.getEntity('entity_log', 'log');
+
+            game.Audio.channel('bonus').play('bonus');
 
             switch (type.type) {
                 case 'ammo':

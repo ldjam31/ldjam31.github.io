@@ -111,6 +111,7 @@
                 game.state.invincibility = 60;
                 game.state.armour -= player.module('module_physics').speed * 30 + 5;
                 if (this.module('module_submarineUpdater').invincibility <= 0) {
+                    game.Audio.channel('hit').play((Math.random() > 0.5) ? 'hitA' : 'hitB').volume = FX_VOLUME;
                     this.module('module_submarineUpdater').invincibility = this.module('module_submarineUpdater').invincibilityMax;
                     this.module('module_submarineUpdater').health -= player.module('module_physics').speed * 30;
                     if (this.module('module_submarineUpdater').health < 0) {
@@ -120,13 +121,23 @@
             }
         })
         .whenHitsEntities(['entity_rocket'], function (rocket, screen, game) {
-            var log, ammo, armour, o2, fuel;
+            var log, ammo, armour, o2, fuel, dist, distX, distY, player;
             
             if (rocket.module('module_type').type === 'rocket_player') {
+                player = screen.getEntity('entity_player', 'player');
+                if (player) {
+                    distX = this.xCenter - player.xCenter;
+                    distY = this.yCenter - player.yCenter;
+                    dist = Math.sqrt(distX * distX + distY * distY);
+                    game.Audio.channel('hit').play((Math.random() > 0.5) ? 'hitA' : 'hitB').volume = FX_VOLUME / dist;
+                }
+                
                 this.module('module_submarineUpdater').invincibility = this.module('module_submarineUpdater').invincibilityMax;
                 this.module('module_submarineUpdater').health -= rocket.module('module_rocketUpdater').damages;
                 screen.removeEntity(rocket);
                 if (this.module('module_submarineUpdater').health < 0) {
+                    game.Audio.channel('bonus').play('bonus');
+
                     ammo = ~~(Math.random() * SUBMARINE_LEVEL_COEF * this.module('module_submarineUpdater').level * SUBMARINE_AMMO_LOOT);
                     armour = ~~(Math.random() * SUBMARINE_LEVEL_COEF * this.module('module_submarineUpdater').level * SUBMARINE_ARMOUR_LOOT);
                     fuel = ~~(Math.random() * SUBMARINE_LEVEL_COEF * this.module('module_submarineUpdater').level * SUBMARINE_FUEL_LOOT);

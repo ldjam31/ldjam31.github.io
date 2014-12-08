@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+var FX_VOLUME = 0.05;
+var MUSIC_VOLUME = 0.8;
+
 !(function () {
     var assets = [
         {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/Board.png'},
@@ -31,7 +34,18 @@
         {type: Cassava.Assets.IMAGE, name: 'charactersFont', src: './assets/img/Font.png'},
         {type: Cassava.Assets.IMAGE, name: 'shattering', src: './assets/img/shattering.png'},
         {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'},
+        {type: Cassava.Assets.AUDIO, name: 'ambient', src: './assets/snd/Ambient.ogg'},
+        {type: Cassava.Assets.AUDIO, name: 'bonus', src: './assets/snd/Bonus.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'end', src: './assets/snd/End.ogg'},
+        {type: Cassava.Assets.AUDIO, name: 'hell', src: './assets/snd/Hell.ogg'},
+        {type: Cassava.Assets.AUDIO, name: 'hitA', src: './assets/snd/HitA.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'hitB', src: './assets/snd/HitB.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'shatterA', src: './assets/snd/ShatterA.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'shatterB', src: './assets/snd/ShatterB.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'sonar', src: './assets/snd/Sonar.wav'},
+        {type: Cassava.Assets.AUDIO, name: 'torpedo', src: './assets/snd/Torpedo.wav'}
     ];
+
 
     var INITIAL_ARMOUR = 100;
     var ARMOUR_MAX = 100;
@@ -51,21 +65,29 @@
         ammoMax: AMMO_MAX,
         rocketDamages: ROCKET_DAMAGES,
         rocketSpeed: ROCKET_SPEED,
-//        armour: initialArmour,
         invincibility: 0,
         armour: INITIAL_ARMOUR,
         armourMax: ARMOUR_MAX,
-//        fuel: initialFuel,
         fuel: INITIAL_FUEL,
         fuelMax: FUEL_MAX,
         o2: INITIAL_O2,
         o2Max: O2_MAX,
         time: 0,
         radarRange: RADAR_RANGE,
-        radarFrequence: RADAR_FREQUENCE
+        radarFrequence: RADAR_FREQUENCE,
+        screenState: 0
     });
 
     game.assets(assets)
         .background('#007224')
         .startAtScreen('screen_game');
+
+    game.Audio
+        .addChannel('sonar')
+        .addChannel('shatter')
+        .addChannel('bonus')
+        .addChannel('torpedo')
+        .addChannel('hit')
+        .addChannel('musicAmbient')
+        .addChannel('musicEnd');
 })()

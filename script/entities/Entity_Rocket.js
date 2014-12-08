@@ -69,7 +69,17 @@
             this.module('module_rocketUpdater').speedY  = args.speedY;
             this.module('module_rocketUpdater').damages = args.damages;
         })
-        .whenHitsEntities(['entity_mine'], function (mine, screen) {
+        .whenHitsEntities(['entity_mine'], function (mine, screen, game) {
+            var player, distX, distY, dist;
+        
+            player = screen.getEntity('entity_player', 'player');
+            if (player) {
+                distX = this.xCenter - player.xCenter;
+                distY = this.yCenter - player.yCenter;
+                dist = Math.sqrt(distX * distX + distY * distY);
+                game.Audio.channel('hit').play((Math.random() > 0.5) ? 'hitA' : 'hitB').volume = FX_VOLUME / dist;
+            }
+
             screen.removeEntity(mine);
             screen.removeEntity(this);
         })

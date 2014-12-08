@@ -38,8 +38,9 @@
             var player, map, nodeScannable, distX, distY,
                 dist, rotation, cosRotation, sinRotation, 
                 playerXCenter, playerYCenter, radarScreen;
-
+                
             if (this.coldDown === 0) {
+                game.Audio.channel('sonar').play('sonar');
                 player = screen.getEntity('entity_player', 'player');
                 map = screen.getEntity('entity_map', 'map');
                 radarScreen = screen.getEntity('entity_radarScreen', 'radarScreen');
