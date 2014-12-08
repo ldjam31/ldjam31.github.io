@@ -52,8 +52,8 @@
             
             if (this.ttl > 0) {
                 if (this.movementTTL <= 0) {
-                    game.camera.x = (Math.random() * 2 - 1) * this.intensity * (this.ttl / this.initialTTL);
-                    game.camera.y = (Math.random() * 2 - 1) * this.intensity * (this.ttl / this.initialTTL);
+                    game.camera.x = ~~((Math.random() * 2 - 1) * this.intensity * (this.ttl / this.initialTTL));
+                    game.camera.y = ~~((Math.random() * 2 - 1) * this.intensity * (this.ttl / this.initialTTL));
                     this.movementTTL = this.movementInitialTTL;
                 } else {
                     this.movementTTL --;
