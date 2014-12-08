@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-var FX_VOLUME = 0.05;
-var MUSIC_VOLUME = 0.8;
+//var FX_VOLUME = 0.05;
+//var MUSIC_VOLUME = 0.8;
+var FX_VOLUME = 0;
+var MUSIC_VOLUME = 0;
 
 !(function () {
     var assets = [
@@ -36,6 +38,9 @@ var MUSIC_VOLUME = 0.8;
         {type: Cassava.Assets.IMAGE, name: 'compass', src: './assets/img/CompassBack.png'},
         {type: Cassava.Assets.IMAGE, name: 'fireButton', src: './assets/img/FireOn.png'},
         {type: Cassava.Assets.IMAGE, name: 'refillButton', src: './assets/img/RefillOn.png'},
+        {type: Cassava.Assets.IMAGE, name: 'rotationHandle', src: './assets/img/RotationHandle.png'},
+        {type: Cassava.Assets.IMAGE, name: 'speedHandle', src: './assets/img/SpeedHandle.png'},
+        
         {type: Cassava.Assets.AUDIO, name: 'ambient', src: './assets/snd/Ambient.ogg'},
         {type: Cassava.Assets.AUDIO, name: 'bonus', src: './assets/snd/Bonus.wav'},
         {type: Cassava.Assets.AUDIO, name: 'end', src: './assets/snd/End.ogg'},

@@ -23,18 +23,9 @@
  */
 
 (function ( ) {
-    var FUEL_REQUIRED_FOR_ACCELERATION = 0.00018;
-    var FUEL_REQUIRED_FOR_ROTATION_ACCELERATION = 0.0001;
-
-    var PLAYER_INERTIA = 0.00027;
+    var PLAYER_INERTIA = 0.00017;
     var PLAYER_ROTATION_INERTIA = 0.00008;
-    var PLAYER_MAX_SPEED = 0.2;
-    var PLAYER_MAX_ROTATION_SPEED = Math.PI/200;
-
-    var MAX_ACCELERATION_FRONT = 0.00072;
-    var MAX_ACCELERATION_BACK = 0.0004;
-    var MAX_ACCELERATION_ROTATION = 0.0005;
-
+    
     game.Entity.define('entity_player')
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
             width: 20,
@@ -44,8 +35,8 @@
             {
                 type: 'module_physics',
                 data: {
-                    maxSpeed: PLAYER_MAX_SPEED,
-                    maxRotationSpeed: PLAYER_MAX_ROTATION_SPEED,
+                    maxSpeed: 0,
+                    maxRotationSpeed: 0,
                     inertia: PLAYER_INERTIA,
                     rotationInertia: PLAYER_ROTATION_INERTIA
                 }
@@ -58,49 +49,6 @@
             this.y = args.y;
             this.module('module_physics').rotation = -Math.PI / 2;
         })
-        .whenKeyIsPressed(
-            38, function (s, game) { //up
-                this.module('module_physics').acceleration += MAX_ACCELERATION_FRONT;
-                game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION);
-            }
-        )
-        .whenKeyIsPressed(
-            40, function (s, game) { //down
-                this.module('module_physics').acceleration -= MAX_ACCELERATION_BACK;
-                game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ACCELERATION);
-            }
-        )
-        .whenKeyIsPressed(
-            37, function (s, game) { //left
-                this.module('module_physics').rotationAcceleration -= MAX_ACCELERATION_ROTATION;
-                game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ROTATION_ACCELERATION);
-            }
-        )
-        .whenKeyIsPressed(
-            39, function (s, game) { //right
-                this.module('module_physics').rotationAcceleration += MAX_ACCELERATION_ROTATION;
-                game.state.fuel = Cassava.fixedFloat(game.state.fuel - FUEL_REQUIRED_FOR_ROTATION_ACCELERATION);
-            }
-        )
-// DEBUG ONLY :D
-//        .whenKeyIsPressed(
-//            88, function (screen, game) {
-//                if (game.state.ammo > 0 && game.state.rocketReload <= 0) {
-//                    game.Audio.channel('torpedo').play('torpedo');
-//                    screen.getEntity('entity_map', 'map').child('cell_0_0').addChild('entity_rocket', {
-//                        type: 'rocket_player',
-//                        x: this.xCenter,
-//                        y: this.yCenter,
-//                        speedX: game.state.rocketSpeed * Math.cos(this.module('module_physics').rotation),
-//                        speedY: game.state.rocketSpeed * Math.sin(this.module('module_physics').rotation),
-//                        damages: game.state.rocketDamages,
-//                    })
-//
-//                    game.state.rocketReload = game.state.initialRocketReload;
-//                    game.state.ammo--;
-//                }
-//            }
-//        )
         .whenHitsEntities(['entity_rocket'], function (rocket, screen) {
             if (rocket.module('module_type').type === 'rocket_enemy') {
                 game.Audio.channel('hit').play('hitA').volume = FX_VOLUME;

@@ -26,7 +26,7 @@
     var data = {
         speed: 0,
         acceleration: 0,
-        maxSpeed: 0,
+//        maxSpeed: 0,
         inertia: 0,
         
         rotation: 0,
@@ -47,20 +47,20 @@
         this.rotation = this.rotation || 0;
         
         this.speed = Cassava.fixedFloat(this.speed + this.acceleration);
-        if (this.speed > 0 && this.speed > this.maxSpeed) {
-            this.speed = this.maxSpeed;
-        }
-        if (this.speed < 0 && this.speed < -this.maxSpeed) {
-            this.speed = -this.maxSpeed;
-        }
+//        if (this.speed > 0 && this.speed > this.maxSpeed) {
+//            this.speed = this.maxSpeed;
+//        }
+//        if (this.speed < 0 && this.speed < -this.maxSpeed) {
+//            this.speed = -this.maxSpeed;
+//        }
 
         this.rotationSpeed = Cassava.fixedFloat(this.rotationSpeed + this.rotationAcceleration);
-        if (this.rotationSpeed > 0 && this.rotationSpeed > this.maxRotationSpeed) {
-            this.rotationSpeed = this.maxRotationSpeed;
-        }
-        if (this.rotationSpeed < 0 && this.rotationSpeed < -this.maxRotationSpeed) {
-            this.rotationSpeed = -this.maxRotationSpeed;
-        }
+//        if (this.rotationSpeed > 0 && this.rotationSpeed > this.maxRotationSpeed) {
+//            this.rotationSpeed = this.maxRotationSpeed;
+//        }
+//        if (this.rotationSpeed < 0 && this.rotationSpeed < -this.maxRotationSpeed) {
+//            this.rotationSpeed = -this.maxRotationSpeed;
+//        }
 
         this.rotation = Cassava.fixedFloat((this.rotation + this.rotationSpeed) % (2*Math.PI)); 
 

@@ -23,37 +23,9 @@
  */
 
 (function ( ) {
-    game.Screen.define('screen_game')
-        .entities([
-            {type: 'entity_hud'},
-            {
-                type: 'entity_player',
-                data: {
-                    x: MAP_LIMITS / 2,
-                    y: MAP_LIMITS / 2
-                }
-            },
-            {
-                type: 'entity_map'
-            },
-            {type: 'entity_radarScreen'},
-            {type: 'entity_shattering'},
-            {type: 'entity_eventsManager'},
-            {type: 'entity_speedSlider'},
-            {type: 'entity_rotationSlider'},
-            {type: 'entity_fireButton'},
-            {type: 'entity_refillButton'}
-        ])
-        .postEventModules([
-            'module_radar',
-            'module_statsUpdater',
-            'module_soundsManager',
-        ])
-        .onCreate(function () {
-            game.Audio.channel('sonar').volume = FX_VOLUME;
-            game.Audio.channel('shatter').volume = FX_VOLUME;
-            game.Audio.channel('bonus').volume = FX_VOLUME;
-            game.Audio.channel('torpedo').volume = FX_VOLUME;
-            game.Audio.channel('hit').volume = FX_VOLUME;
-        })
+    game.Sprite.define('sprite_sliderHorizontal')
+        .asset('rotationHandle');
+    
+    game.Sprite.define('sprite_sliderVertical')
+        .asset('speedHandle');
 })()
