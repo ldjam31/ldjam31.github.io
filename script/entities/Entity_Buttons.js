@@ -47,7 +47,7 @@
         .sprite('sprite_refillButton')
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
             width: 70,
-            height: 70
+            height: 72
         })
         .modules([
             'module_buttonPressing'
@@ -55,7 +55,7 @@
         .onCreate(function () {
             this.z = 2;
             this.x = 51;
-            this.y = 28;
+            this.y = 26;
         })
         .whenPointed(function (e, s, game) {
             this.module('module_buttonPressing').isPressed = true;
@@ -75,7 +75,7 @@
         .sprite('sprite_fireButton')
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
             width: 70,
-            height: 70
+            height: 72
         })
         .modules([
             'module_buttonPressing'
@@ -83,7 +83,7 @@
         .onCreate(function () {
             this.z = 2;
             this.x = 50;
-            this.y = 500;
+            this.y = 499;
         })
         .whenPointed(function (e, screen, game) {
             var player, log;
