@@ -18,6 +18,11 @@ body
 	color:rgb(235,235,235);
 	font-family:Calibri,Arial,sans-serif;
 	font-size:18px;
+	cursor:default;
+	user-select:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
 }
 
 h1
