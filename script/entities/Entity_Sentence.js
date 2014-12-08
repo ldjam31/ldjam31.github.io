@@ -103,8 +103,8 @@
         armour: 75,
         ammo: 76,
         fuel: 77,
-        o2: 78,
-        submarine: 79
+        submarine: 78,
+        o2: 79
     };
 
     game.Module.define('module_sentence')

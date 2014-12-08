@@ -23,6 +23,8 @@
  */
 
 (function ( ) {
+    var BONUS_SIZE = 20;
+    
     game.Module.define('module_bonusUpdater')
         .data({
             ttl: 0
@@ -41,8 +43,8 @@
             'module_type'
         ])
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
-            width: 30,
-            height: 30
+            width: 20,
+            height: 20
         })
         .onCreate(function (args) {
             this.module('module_type').type = args.type;
@@ -54,11 +56,16 @@
         })
         .whenHitsEntities(['entity_player'], function (player, screen) {
             var type = this.module('module_type');
+            var log;
             
             switch (type.type) {
                 case'ammo':
                 case'armour':
                 case'fuel':
+                    log = screen.getEntity('entity_log', 'log');
+                    log.module('module_logUpdater').logsBuffer.push(
+                        EVENT_ICON[type.type] +'+'+ type.value
+                    );
                     game.state[type.type] += type.value;
                     if (game.state[type.type] > game.state[type.type + 'Max']) {
                         game.state[type.type] = game.state[type.type + 'Max'];

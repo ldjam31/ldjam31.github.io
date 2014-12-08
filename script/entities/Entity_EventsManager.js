@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
+var EVENT_ICON = {
+    ammo: '/a',
+    fuel: '/f',
+    armour: '/h'
+};
 (function ( ) {
-    var EVENT_ICON = {
-        ammo: '/a',
-        fuel: '/f',
-        armour: '/h'
-    };
-    
+
     var EVENTS_TEXT = [
         "Hello robert ! :D",
         "Je test des trucs ptain",
@@ -44,19 +44,21 @@
         'armour'
     ];
 
-//    var MIN_EVENTS_CD = 5400;
-//    var MAX_EVENTS_CD = 10800;
-    var MIN_EVENTS_CD = 2700;
-    var MAX_EVENTS_CD = 4050;
+    var MIN_EVENTS_UPGRADE_CD = 7200;
+    var MAX_EVENTS_UPGRADE_CD = 8000;
+    var MIN_EVENTS_SUBMARINE_CD = 2000;
+    var MAX_EVENTS_SUBMARINE_CD = 3000;
+    var MIN_EVENTS_ITEM_CD = 1000;
+    var MAX_EVENTS_ITEM_CD = 2000;
+    var MIN_EVENTS_TEXT_CD = 24000;
+    var MAX_EVENTS_TEXT_CD = 36000;
 //    var MIN_EVENTS_CD = 540;
 //    var MAX_EVENTS_CD = 1080;
+    var MIN_SPAWN_DIST = 200;
+    var MAX_SPAWN_DIST = 350;
 
-    var EVENT_TEXT_PROBA = 0.1;
-    var EVENT_ITEM_PROBA = 0.6;
-    var EVENT_UPGRADE_PROBA = 0.3;
-
-    var MIN_SPAWN_ITEM_DIST = 300;
-    var MAX_SPAWN_ITEM_DIST = 400;
+    var SUBMARINE_TIME_BEFORE_LVL_2 = 18000;
+    var SUBMARINE_TIME_BEFORE_LVL_3 = 36000;
 
     var MIN_ARMOUR = 10;
     var MAX_ARMOUR = 40;
@@ -64,83 +66,125 @@
     var MAX_FUEL = 60;
     var MIN_AMMO = 1;
     var MAX_AMMO = 3;
-    var ITEM_MIN_TTL = 7200;
-    var ITEM_MAX_TTL = 10800;
+    var MIN_TTL = 3600;
+    var MAX_TTL = 5400;
 
-    game.Module.define('module_eventManagerUpdater')
+    game.Module.define('module_eventsManagerUpdater')
         .data({
-            coldDown: 0
+            textColdDown: MIN_EVENTS_TEXT_CD,
+            itemColdDown: MIN_EVENTS_ITEM_CD,
+            submarineColdDown: MIN_EVENTS_SUBMARINE_CD,
+            upgradeColdDown: MIN_EVENTS_UPGRADE_CD
         })
         .onUpdate(function (e, screen, game) {
-            var logger, event, map, player, cell, dist, angle, x, y, eventType, h, m, ttl, value, rnd;
+            var logger, event, player, cell, dist, angle, x, y, m, s, ttl, value, level;
 
-            rnd = Math.random();
-            if (rnd < EVENT_TEXT_PROBA) {
-                eventType = 'text';
-            } else if (rnd < EVENT_TEXT_PROBA + EVENT_ITEM_PROBA) {
-                eventType = 'item';
-            } else {
-                eventType = 'bonus';
-            }
 
-            if (this.coldDown === 0) {
-                this.coldDown = ~~(1 + Math.random() * (MAX_EVENTS_CD - MIN_EVENTS_CD + 1)) + MIN_EVENTS_CD;
-                if (logger = screen.getEntity('entity_log', 'log')) {
-                    switch (eventType) {
-                        case 'text':
-                            event = EVENTS_TEXT[~~(Math.random() * EVENTS_TEXT.length)];
-                            logger.module('module_logUpdater').logsBuffer.push(event);
-                            break;
-                        case 'item':
-                            player = screen.getEntity('entity_player', 'player');
-                            if (player) {
-                                dist = ~~(1 + Math.random() * (MAX_SPAWN_ITEM_DIST - MIN_SPAWN_ITEM_DIST + 1)) + MIN_SPAWN_ITEM_DIST;
-                                angle = Math.random() * Math.PI * 2;
-                                x = ~~(player.x + dist * Math.cos(angle));
-                                y = ~~(player.y + dist * Math.sin(angle));
-                                cell = screen.getEntity('entity_cell', 'cell_' + ~~(x * 10 / (MAP_LIMITS)) + '_' + ~~(y * 10 / (MAP_LIMITS)));
-                                if (cell) {
-                                    ttl = ~~(1 + Math.random() * (ITEM_MAX_TTL - ITEM_MIN_TTL + 1)) + ITEM_MIN_TTL;
-                                    switch(event) {
-                                        case 'ammo':
-                                            value = ~~(1 + Math.random() * (MAX_AMMO - MIN_AMMO + 1)) + MIN_AMMO;
-                                            break;
-                                        case 'fuel':
-                                            value = ~~(1 + Math.random() * (MAX_FUEL - MIN_FUEL + 1)) + MIN_FUEL;
-                                            break;
-                                        case 'armour':
-                                            value = ~~(1 + Math.random() * (MAX_ARMOUR - MIN_ARMOUR + 1)) + MIN_ARMOUR;
-                                            break;
-                                    }
-                                    value = ~~(1 + Math.random() * (ITEM_MAX_TTL - ITEM_MIN_TTL + 1)) + ITEM_MIN_TTL;
-                                    event = EVENTS_ITEM[~~(Math.random() * EVENTS_ITEM.length)];
-                                    h = ~~((game.state.time + ttl) / 216000);
-                                    h = (h < 10) ? '0' + h : h;
-                                    m = ~~((game.state.time + ttl) % 216000 / 3600);
-                                    m = (m < 10) ? '0' + m : m;
-                                    logger.module('module_logUpdater').logsBuffer.push(
-                                        EVENT_ICON[event] + ' at ' + x + '.' + (MAP_LIMITS - y) + ' before ' + h + ':' + m
-                                    );
-                                    cell.addChild('entity_bonus', {
-                                        type: event,
-                                        x: x,
-                                        y: y,
-                                        ttl: ttl,
-                                        value: value
-                                    })
-                                }
-                            }
-                            break;
+            if (this.itemColdDown <= 0) {
+                player = screen.getEntity('entity_player', 'player');
+                logger = screen.getEntity('entity_log', 'log');
+                if (player && logger) {
+                    dist = ~~(1 + Math.random() * (MAX_SPAWN_DIST - MIN_SPAWN_DIST + 1)) + MIN_SPAWN_DIST;
+                    angle = Math.random() * Math.PI * 2;
+                    x = ~~(player.x + dist * Math.cos(angle));
+                    y = ~~(player.y + dist * Math.sin(angle));
+                    cell = screen.getEntity('entity_cell', 'cell_' + ~~(x * 10 / (MAP_LIMITS)) + '_' + ~~(y * 10 / (MAP_LIMITS)));
+                    if (cell) {
+                        ttl = ~~(1 + Math.random() * (MAX_TTL - MIN_TTL + 1)) + MIN_TTL;
+                        event = EVENTS_ITEM[~~(Math.random() * EVENTS_ITEM.length)];
+                        switch (event) {
+                            case 'ammo':
+                                value = ~~(1 + Math.random() * (MAX_AMMO - MIN_AMMO + 1)) + MIN_AMMO;
+                                break;
+                            case 'fuel':
+                                value = ~~(1 + Math.random() * (MAX_FUEL - MIN_FUEL + 1)) + MIN_FUEL;
+                                break;
+                            case 'armour':
+                                value = ~~(1 + Math.random() * (MAX_ARMOUR - MIN_ARMOUR + 1)) + MIN_ARMOUR;
+                                break;
+                        }
+                        m = ~~((game.state.time + ttl) % 216000 / 3600);
+                        m = (m < 10) ? '0' + m : m;
+                        s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
+                        s = (s < 10) ? '0' + s : s;
+                        logger.module('module_logUpdater').logsBuffer.push(
+                            EVENT_ICON[event] + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            );
+                        cell.addChild('entity_bonus', {
+                            type: event,
+                            x: x,
+                            y: y,
+                            ttl: ttl,
+                            value: value
+                        })
                     }
                 }
+                this.itemColdDown = ~~(1 + Math.random() * (MAX_EVENTS_ITEM_CD - MIN_EVENTS_ITEM_CD + 1)) + MIN_EVENTS_ITEM_CD;
             } else {
-                this.coldDown--;
+                this.itemColdDown--;
             }
+
+            if (this.submarineColdDown <= 0) {
+                player = screen.getEntity('entity_player', 'player');
+                logger = screen.getEntity('entity_log', 'log');
+                if (player && logger) {
+                    dist = ~~(1 + Math.random() * (MAX_SPAWN_DIST - MIN_SPAWN_DIST + 1)) + MIN_SPAWN_DIST;
+                    angle = Math.random() * Math.PI * 2;
+                    x = ~~(player.x + dist * Math.cos(angle));
+                    y = ~~(player.y + dist * Math.sin(angle));
+                    cell = screen.getEntity('entity_cell', 'cell_' + ~~(x * 10 / (MAP_LIMITS)) + '_' + ~~(y * 10 / (MAP_LIMITS)));
+                    if (cell) {
+                        if (game.state.time > SUBMARINE_TIME_BEFORE_LVL_3) {
+                            level = 3;
+                        } else if (game.state.time > SUBMARINE_TIME_BEFORE_LVL_3) {
+                            level = 2;
+                        } else {
+                            level = 1;
+                        }
+                        ttl = ~~(1 + Math.random() * (MAX_TTL - MIN_TTL + 1)) + MIN_TTL;
+                        m = ~~((game.state.time + ttl) % 216000 / 3600);
+                        m = (m < 10) ? '0' + m : m;
+                        s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
+                        s = (s < 10) ? '0' + s : s;
+                        logger.module('module_logUpdater').logsBuffer.push(
+                            '/s ' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            );
+                        cell.addChild('entity_submarine', {
+                            x: x,
+                            y: y,
+                            ttl: ttl,
+                            level: level
+                        })
+                    }
+                }
+                this.submarineColdDown = ~~(1 + Math.random() * (MAX_EVENTS_SUBMARINE_CD - MIN_EVENTS_SUBMARINE_CD + 1)) + MIN_EVENTS_SUBMARINE_CD;
+            } else {
+                this.submarineColdDown--;
+            }
+
+            if (this.upgradeColdDown <= 0) {
+
+                this.upgradeColdDown = ~~(1 + Math.random() * (MAX_EVENTS_UPGRADE_CD - MIN_EVENTS_UPGRADE_CD + 1)) + MIN_EVENTS_UPGRADE_CD;
+            } else {
+                this.upgradeColdDown--;
+            }
+
+            if (this.textColdDown <= 0) {
+                logger = screen.getEntity('entity_log', 'log');
+                if (logger) {
+                    event = EVENTS_TEXT[~~(Math.random() * EVENTS_TEXT.length)];
+                    logger.module('module_logUpdater').logsBuffer.push(event);
+                    this.textColdDown = ~~(1 + Math.random() * (MAX_EVENTS_TEXT_CD - MIN_EVENTS_TEXT_CD + 1)) + MIN_EVENTS_TEXT_CD;
+                }
+            } else {
+                this.textColdDown--;
+            }
+
         })
 
     game.Entity.define('entity_eventsManager')
         .modules([
-            'module_eventManagerUpdater'
+            'module_eventsManagerUpdater'
         ])
         .onCreate(function () {
             this.id = 'eventsManager';

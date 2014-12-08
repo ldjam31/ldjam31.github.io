@@ -97,19 +97,15 @@
                     character: DIGIT,
                     characterWidth: DIGIT_WIDTH,
                     characterHeight: DIGIT_HEIGHT,
-                    x: 199,
+                    x: 233,
                     y: 537
                 });
             }
             
-            hours = ~~(game.state.time / 216000);
             minutes = ~~(game.state.time % 216000 / 3600);
             seconds = ~~(game.state.time % 216000 % 3600 / 60);
             
             sentence.module('module_sentence').sentence = 
-                ((hours < 10) ? '0' : '') + 
-                hours + 
-                ':' + 
                 ((minutes < 10) ? '0' : '') + 
                 minutes + 
                 ':' + 

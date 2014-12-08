@@ -69,7 +69,7 @@
                             y: entity.yCenter,
                             speedX: this.rocketSpeed * distX / dist,
                             speedY: this.rocketSpeed * distY / dist,
-                            damages: game.state.rocketDamages
+                            damages: this.rocketDmg
                         });
                         this.rocketCd = this.rocketMaxCd;
                     }
@@ -151,7 +151,7 @@
                     
                     log = screen.getEntity('entity_log', 'log');
                     if (log) {
-                        log.module('module_logUpdater').logsBuffer.push('/a:' + ammo + ' /h:' + armour + ' /o:' + o2 + ' /f:' + fuel);
+                        log.module('module_logUpdater').logsBuffer.push('/a+' + ammo + ' /h+' + armour + ' /o+' + o2 + ' /f+' + fuel);
                     }
                     screen.removeEntity(this);
                 }

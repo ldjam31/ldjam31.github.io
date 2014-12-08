@@ -23,8 +23,8 @@
  */
 
 (function ( ) {
-    var fuelConsumptionForAcceleration = 0.018;
-    var fuelConsumptionForRotationAcceleration = 0.01;
+    var fuelConsumptionForAcceleration = 0.00018;
+    var fuelConsumptionForRotationAcceleration = 0.0001;
 
     game.Entity.define('entity_player')
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
@@ -37,7 +37,7 @@
                 data: {
                     maxSpeed: 0.2,
                     maxRotationSpeed: Math.PI / 200,
-                    inertia: 0.0003,
+                    inertia: 0.00003,
                     rotationInertia: 0.00008
                 }
             },
@@ -51,13 +51,13 @@
         })
         .whenKeyIsPressed(
             38, function (s, game) { //up
-                this.module('module_physics').acceleration += 0.0018;
+                this.module('module_physics').acceleration += 0.00072;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
         .whenKeyIsPressed(
             40, function (s, game) { //down
-                this.module('module_physics').acceleration -= 0.001;
+                this.module('module_physics').acceleration -= 0.0004;
                 game.state.fuel = Cassava.fixedFloat(game.state.fuel - fuelConsumptionForAcceleration);
             }
         )
