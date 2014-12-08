@@ -31,10 +31,10 @@
     var SUBMARINE_ROCKET_TTL = 180;
     var SUBMARINE_LEVEL_COEF = 0.7;
     var SUBMARINE_RADAR_RANGE = 170;
-    var SUBMARINE_ARMOUR_LOOT = 30;
-    var SUBMARINE_AMMO_LOOT = 5;
-    var SUBMARINE_O2_LOOT = 30;
-    var SUBMARINE_FUEL_LOOT = 30;
+    var SUBMARINE_ARMOUR_LOOT = 10;
+    var SUBMARINE_AMMO_LOOT = 2;
+    var SUBMARINE_O2_LOOT = 10;
+    var SUBMARINE_FUEL_LOOT = 10;
 
     game.Module.define('module_submarineUpdater')
         .data({

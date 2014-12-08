@@ -24,12 +24,12 @@
 
 (function () {
     
-    var AMBIENT_TARGET_SPEED = 0.01;
+    var AMBIENT_TARGET_SPEED = 0.005;
     var END_TARGET_SPEED = 0.003;
     
     game.Module.define('module_soundsManager')
         .data({
-            musicAmbientTarget: 0,
+            musicAmbientTarget: 1,
             musicAmbientTargetSpeed: AMBIENT_TARGET_SPEED,
             musicEndTarget: 0,
             musicEndTargetSpeed: END_TARGET_SPEED
@@ -52,10 +52,9 @@
             } else {
                 this.musicEndTarget = 0;
             }
-            this.musicAmbientTarget = (player.module('module_physics').speed / player.module('module_physics').maxSpeed) - this.musicEndTarget;
         })
         .onInit(function () {
-            game.Audio.channel('musicAmbient').play('ambient').loop().volume = 0;
+            game.Audio.channel('musicAmbient').play('ambient').loop().volume = MUSIC_VOLUME;
             game.Audio.channel('musicEnd').play('end').loop().volume = 0;
         })
 })()

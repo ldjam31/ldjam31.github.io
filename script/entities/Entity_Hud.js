@@ -89,6 +89,7 @@
                     (game.state.fuel < 10 ? '0' : '') +
                     ~~game.state.fuel;
             
+            
             sentence = entity.child('time');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
@@ -145,8 +146,24 @@
                         ((MAP_LIMITS - player.y < 100) ? '0' : '') + 
                         ((MAP_LIMITS -player.y < 10) ? '0' : '') + 
                         ~~(MAP_LIMITS -player.y);
-                    
+
+                                sentence = entity.child('fuel');
+                
                 compass.sprite.rotation = -player.module('module_physics').rotation * 1 - Math.PI/2;
+
+                sentence = entity.child('speed');
+                if (!sentence) {
+                    sentence = entity.addChild('entity_sentence', {
+                        id: 'speed',
+                        sentence: '100',
+                        character: DIGIT,
+                        characterWidth: DIGIT_WIDTH,
+                        characterHeight: DIGIT_HEIGHT,
+                        x: 645,
+                        y: 187
+                    })
+                }
+                sentence.module('module_sentence').sentence = '' + (~~ (player.module('module_physics').speed * 600));
             }
         })
         .onInit(function() {
