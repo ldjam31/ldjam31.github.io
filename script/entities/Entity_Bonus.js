@@ -38,7 +38,7 @@
     var AMMO_UPGRADE_INFO = '/a max';
     var ROCKET_DMG_UPGRADE_INFO = '/a damages max';
     var RADAR_RANGE_UPGRADE_INFO = 'radar range';
-    var RADAR_FREQUENCE_UPGRADE_INFO = 'rada';
+    var RADAR_FREQUENCE_UPGRADE_INFO = 'radar freq';
 
     game.Module.define('module_bonusUpdater')
         .data({
@@ -118,7 +118,7 @@
                     break;
                 case 'upgrade_radarFrequence':
                     game.state.radarFrequence += RADAR_FREQUENCE_UPGRADE;
-                    info = RADAR_FREQUENCE_UPGRADE_INFO + '+' + (~~(RADAR_FREQUENCE_UPGRADE * 10 / 60)) / 10 + 'hz';
+                    info = RADAR_FREQUENCE_UPGRADE_INFO + '+' + -(~~(RADAR_FREQUENCE_UPGRADE * 10 / 60)) / 10 + 'hz';
                     break;
             }
 
