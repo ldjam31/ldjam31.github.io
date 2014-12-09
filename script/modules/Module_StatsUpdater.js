@@ -44,9 +44,9 @@
             game.state.o2 = (game.state.o2 < 0) ? 0 : game.state.o2;
             if (game.state.armour <= 0 || game.state.o2 <= 0) {
                 
-                screen.getEntity('entity_log', 'log').module('module_logUpdater').logsBuffer.push('================');
-                screen.getEntity('entity_log', 'log').module('module_logUpdater').logsBuffer.push('GAME OVER');
                 screen.getEntity('entity_log', 'log').module('module_logUpdater').logsBuffer.push('SCORE:' + ~~(game.state.time / 60));
+                screen.getEntity('entity_log', 'log').module('module_logUpdater').logsBuffer.push('GAME OVER');
+                screen.getEntity('entity_log', 'log').module('module_logUpdater').logsBuffer.push('================');
                 screen.getEntity('entity_map', 'map').module('module_mapUpdater').reinit = true;
                 game.state = {
                     ammo: INITIAL_AMMO,
