@@ -30,10 +30,18 @@ var EVENT_ICON = {
 (function ( ) {
 
     var EVENTS_TEXT = [
-        "Hello robert ! :D",
-        "Je test des trucs ptain",
-        "C'est court",
-        ":3"
+        'Ever saw a giant squid?',
+        'Is talking to you my job?',
+        'Do you have a license for this?',
+        'I wish I knew some jokes...',
+		'Man you just got shrimped :D',
+		'The whale is in the mussel.',
+		'Just forget about the surface.',
+		'Haven\'t your hopes sank yet?',
+		'Are you wondering who I am?',
+		'Can we get some action please?',
+		'I think I just saw the Nautilus.',
+		'What\'s with all the submarines?'
     ];
 
     var EVENTS_ITEM = [
@@ -81,11 +89,11 @@ var EVENT_ICON = {
                 time: 0
             },
 			{
-				text: 'Look at this brand new',
+				text: 'Look at this brand new sonar,',
 				time: 0
 			},
 			{
-				text: 'screen, don\'t break it!',
+				text: 'don\'t break it you prick.',
 				time: 300
 			},
 			{
@@ -97,24 +105,64 @@ var EVENT_ICON = {
 				time: 300
 			},
 			{
+				text: '/f is fuel, don\'t drink that.',
+				time: 300
+			},
+			{
 				text: '/o will refill some oxygen.',
 				time: 300
 			},
 			{
-				text: '/a is ammo, more is better.',
+				text: '/a is ammo, the more the better.',
 				time: 300
 			},
 			{
-				text: '/f will refill some fuel.',
+				text: '/u can upgrade your equipment.',
 				time: 300
 			},
 			{
-				text: '/u can upgrade some stuff.',
+				text: '/s are enemies, destroy and loot.',
 				time: 300
 			},
 			{
-				text: '/s are enemies, destroy all.',
+				text: '---',
+				time: 0
+			},
+			{
+				text: 'You know what coordinates',
+				time: 0
+			},
+			{
+				text: 'are, right? Good.',
 				time: 300
+			},
+			{
+				text: '--',
+				time: 0
+			},
+			{
+				text: 'By the way, avoid rocks and',
+				time: 0
+			},
+			{
+				text: 'mines, unless you\'re stupid.',
+				time: 300
+			},
+			{
+				text: '---',
+				time: 0
+			},
+			{
+				text: '??? Stop wasting time, just try',
+				time: 0
+			},
+			{
+				text: 'the damn buttons.',
+				time: 300
+			},
+			{
+				text: '---',
+				time: 0
 			}
         ],
         gameOver: [
@@ -151,7 +199,7 @@ var EVENT_ICON = {
                 time: 0
             },
             {
-                text: 'another try!',
+                text: 'another try.',
                 time: 300
             }
         ]
