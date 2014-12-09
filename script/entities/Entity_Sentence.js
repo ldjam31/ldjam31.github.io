@@ -117,7 +117,7 @@
             }
         )
         .onUpdate(
-            function (entity) {
+            function (entity, screen) {
                 var y = entity.y,
                     x = entity.x,
                     childNode = entity.firstChildNode,
@@ -231,12 +231,7 @@
                 }
 
                 while (childNode) {
-                    childNode.o.x = x;
-                    childNode.o.y = y;
-                    childNode.o.sprite.isVisible = false;
-                    childNode.o.sprite.frame = 0;
-
-                    x += this.characterHeight;
+                    screen.removeEntity(childNode.o);
                     childNode = childNode.next;
                 }
             }
