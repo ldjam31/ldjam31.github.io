@@ -37,7 +37,7 @@
             if (this.reinit) {
                 var i, j, k, entitiesToPut, cell, originX, originY, nodeCell, nodeElem;
 
-
+                this.reinit = false;
                 nodeCell = entity.firstChildNode;
                     while (nodeCell) {
                         nodeElem = nodeCell.o.firstChildNode;
