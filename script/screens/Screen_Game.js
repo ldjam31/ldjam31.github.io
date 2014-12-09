@@ -51,9 +51,9 @@
             'module_soundsManager'
         ])
         .onCreate(function () {
-            game.Audio.channel('sonar').volume = FX_VOLUME;
+            game.Audio.channel('sonar').volume = SONAR_VOLUME;
             game.Audio.channel('shatter').volume = FX_VOLUME;
-            game.Audio.channel('bonus').volume = FX_VOLUME;
+            game.Audio.channel('bonus').volume = BONUS_VOLUME;
             game.Audio.channel('torpedo').volume = FX_VOLUME;
             game.Audio.channel('hit').volume = FX_VOLUME;
         })
