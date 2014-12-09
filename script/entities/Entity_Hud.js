@@ -25,15 +25,15 @@
 !(function () {
     var x = -20;
     var y = -20;
-    
+
     var DIGIT = 'entity_characterDigit';
     var DIGIT_WIDTH = 22;
     var DIGIT_HEIGHT = 37;
-    
+
     game.Module.define('module_hudUpdater')
         .onUpdate(function (entity, screen, game) {
             var sentence, player, seconds, minutes, hours, compass;
-        
+
             sentence = entity.child('armour');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
@@ -47,12 +47,12 @@
                 })
             }
             sentence.module('module_sentence')
-                .sentence = 
-                    (game.state.armour < 100 ? '0' : '') +
-                    (game.state.armour < 10 ? '0' : '') +
-                    ~~game.state.armour;
+                .sentence =
+                (game.state.armour < 100 ? '0' : '') +
+                (game.state.armour < 10 ? '0' : '') +
+                ~~game.state.armour;
 
-            
+
             sentence = entity.child('o2');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
@@ -66,11 +66,11 @@
                 })
             }
             sentence.module('module_sentence')
-                .sentence =  
-                    (game.state.o2 < 100 ? '0' : '') +
-                    (game.state.o2 < 10 ? '0' : '') +
-                    ~~game.state.o2;
-            
+                .sentence =
+                (game.state.o2 < 100 ? '0' : '') +
+                (game.state.o2 < 10 ? '0' : '') +
+                ~~game.state.o2;
+
             sentence = entity.child('fuel');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
@@ -84,12 +84,12 @@
                 })
             }
             sentence.module('module_sentence')
-                .sentence = 
-                    (game.state.fuel < 100 ? '0' : '') +
-                    (game.state.fuel < 10 ? '0' : '') +
-                    ~~game.state.fuel;
-            
-            
+                .sentence =
+                (game.state.fuel < 100 ? '0' : '') +
+                (game.state.fuel < 10 ? '0' : '') +
+                ~~game.state.fuel;
+
+
             sentence = entity.child('time');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
@@ -102,18 +102,18 @@
                     y: 537
                 });
             }
-            
+
             minutes = ~~(game.state.time % 216000 / 3600);
             seconds = ~~(game.state.time % 216000 % 3600 / 60);
-            
-            sentence.module('module_sentence').sentence = 
-                ((minutes < 10) ? '0' : '') + 
-                minutes + 
-                ':' + 
-                ((seconds < 10) ? '0' : '') + 
+
+            sentence.module('module_sentence').sentence =
+                ((minutes < 10) ? '0' : '') +
+                minutes +
+                ':' +
+                ((seconds < 10) ? '0' : '') +
                 seconds;
-            
-            
+
+
             sentence = entity.child('coordinates');
             if (!sentence) {
                 sentence = entity.addChild('entity_sentence', {
@@ -134,22 +134,22 @@
                     y: 61
                 })
             }
-            
+
             player = screen.getEntity('entity_player', 'player');
             if (player) {
                 sentence.module('module_sentence')
-                    .sentence = 
-                        ((player.x < 100) ? '0' : '') + 
-                        ((player.x < 10) ? '0' : '') + 
-                        ~~player.x +
-                        '.'+ 
-                        ((MAP_LIMITS - player.y < 100) ? '0' : '') + 
-                        ((MAP_LIMITS -player.y < 10) ? '0' : '') + 
-                        ~~(MAP_LIMITS -player.y);
+                    .sentence =
+                    ((player.x < 100) ? '0' : '') +
+                    ((player.x < 10) ? '0' : '') +
+                    ~~player.x +
+                    '.' +
+                    ((MAP_LIMITS - player.y < 100) ? '0' : '') +
+                    ((MAP_LIMITS - player.y < 10) ? '0' : '') +
+                    ~~(MAP_LIMITS - player.y);
 
-                                sentence = entity.child('fuel');
-                
-                compass.sprite.rotation = -player.module('module_physics').rotation * 1 - Math.PI/2;
+                sentence = entity.child('fuel');
+
+                compass.sprite.rotation = -player.module('module_physics').rotation * 1 - Math.PI / 2;
 
                 sentence = entity.child('speed');
                 if (!sentence) {
@@ -163,10 +163,12 @@
                         y: 187
                     })
                 }
-                sentence.module('module_sentence').sentence = '' + (~~ (player.module('module_physics').speed * 600));
+                if (!(sentence.module('module_sentence').sentence === '' + (~~(player.module('module_physics').speed * 600) + 1) || sentence.module('module_sentence').sentence === '' + (~~(player.module('module_physics').speed * 600) - 1))) {
+                    sentence.module('module_sentence').sentence = '' + (~~(player.module('module_physics').speed * 600));
+                }
             }
         })
-        .onInit(function() {
+        .onInit(function () {
             this.entity.addChild('entity_log');
         })
 
@@ -177,7 +179,7 @@
             'module_hudUpdater'
         ])
         .hitbox(Cassava.Hitbox.RECTANGLE_TYPE, {
-            width : 840,
+            width: 840,
             height: 640
         })
         .onCreate(function () {
