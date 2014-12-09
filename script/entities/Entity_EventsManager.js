@@ -57,38 +57,102 @@ var EVENT_ICON = {
     var EVENTS_SCRIPT = {
         welcome: [
             {
-                text: 'bla',
-                time: 60
+                text: 'Oh hello there! Welcome to',
+                time: 0
             },
             {
-                text: 'bla',
-                time: 60
+                text: 'your new home :-)',
+                time: 300
+            },
+			{
+				text: '---',
+				time: 0
+			},
+			{
+				text: 'Let me explain some basic',
+				time: 0
+			},
+            {
+                text: 'things you\'ll need to know.',
+                time: 300
             },
             {
-                text: 'bla',
-                time: 60
+                text: '---',
+                time: 0
             },
-            {
-                text: 'bla',
-                time: 60
-            }
+			{
+				text: 'Look at this brand new',
+				time: 0
+			},
+			{
+				text: 'screen, don\'t break it!',
+				time: 300
+			},
+			{
+				text: '---',
+				time: 0
+			},
+			{
+				text: '/h can repair this submarine.',
+				time: 300
+			},
+			{
+				text: '/o will refill some oxygen.',
+				time: 300
+			},
+			{
+				text: '/a is ammo, more is better.',
+				time: 300
+			},
+			{
+				text: '/f will refill some fuel.',
+				time: 300
+			},
+			{
+				text: '/u can upgrade some stuff.',
+				time: 300
+			},
+			{
+				text: '/s are enemies, destroy all.',
+				time: 300
+			}
         ],
         gameOver: [
+			{
+				text: '',
+				time: 500
+			},
             {
-                text: 'bla',
-                time: 60
+                text: 'Looks like you were no fit',
+                time: 0
+            },
+			{
+				text: 'for the job after all...',
+				time: 300
+			},
+			{
+				text: '---',
+				time: 0
+			},
+            {
+                text: 'I\'m pretty sure the fishes',
+                time: 0
+            },
+			{
+				text: 'will enjoy your rotten flesh.',
+				time: 300
+			},
+			{
+				text: '---',
+				time: 0
+			},
+            {
+                text: 'You know what, let\'s give it',
+                time: 0
             },
             {
-                text: 'bla',
-                time: 60
-            },
-            {
-                text: 'bla',
-                time: 60
-            },
-            {
-                text: 'bla',
-                time: 60
+                text: 'another try!',
+                time: 300
             }
         ]
     }
