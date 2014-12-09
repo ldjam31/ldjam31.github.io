@@ -283,7 +283,7 @@ var EVENT_ICON = {
                         s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
                         s = (s < 10) ? '0' + s : s;
                         logger.module('module_logUpdater').logsBuffer.push(
-                            EVENT_ICON[event] + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            'Get '+EVENT_ICON[event] + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
                             );
                         cell.addChild('entity_bonus', {
                             type: event,
@@ -322,7 +322,7 @@ var EVENT_ICON = {
                         s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
                         s = (s < 10) ? '0' + s : s;
                         logger.module('module_logUpdater').logsBuffer.push(
-                            '/s' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            'Kill /s' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
                             );
                         cell.addChild('entity_submarine', {
                             x: x,
@@ -354,7 +354,7 @@ var EVENT_ICON = {
                         s = ~~((game.state.time + ttl) % 216000 % 3600 / 60);
                         s = (s < 10) ? '0' + s : s;
                         logger.module('module_logUpdater').logsBuffer.push(
-                            '/u' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
+                            'Get /u' + ' in ' + x + '.' + (MAP_LIMITS - y) + ' before ' + m + ':' + s
                             );
                         cell.addChild('entity_bonus', {
                             type: event,
