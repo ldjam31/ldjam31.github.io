@@ -30,7 +30,7 @@ h1
 	font-size:180%;
 	font-weight:normal;
 	text-align:center;
-	color:rgb(148,204,237);
+	color:rgb(180,180,180);
 }
 
 canvas {
@@ -41,6 +41,7 @@ canvas {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: optimize-contrast;
     -ms-interpolation-mode: nearest-neighbor;
+	border:2px solid rgb(80,80,80);
 }
 
 #game
