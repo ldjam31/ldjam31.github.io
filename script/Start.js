@@ -23,7 +23,7 @@
  */
 
 var FX_VOLUME = 0.9;
-var MUSIC_VOLUME = 0.8;
+var MUSIC_VOLUME = 0.99;
 var REFILL_VOLUME = 0.5;
 var SONAR_VOLUME = 0.15;
 var BONUS_VOLUME = 0.4;
