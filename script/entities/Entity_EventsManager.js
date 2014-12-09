@@ -264,7 +264,7 @@ var EVENT_ICON = {
                     x = ~~(player.x + dist * Math.cos(angle));
                     y = ~~(player.y + dist * Math.sin(angle));
                     cell = screen.getEntity('entity_cell', 'cell_' + ~~(x * 10 / (MAP_LIMITS)) + '_' + ~~(y * 10 / (MAP_LIMITS)));
-                    if (cell) {
+                    if (cell && x > 0 && x < MAP_LIMITS && y > 0 && y < MAP_LIMITS) {
                         ttl = ~~(1 + Math.random() * (MAX_TTL - MIN_TTL + 1)) + MIN_TTL;
                         event = EVENTS_ITEM[~~(Math.random() * EVENTS_ITEM.length)];
                         switch (event) {
@@ -311,7 +311,7 @@ var EVENT_ICON = {
                     if (cell && x > 0 && x < MAP_LIMITS && y > 0 && y < MAP_LIMITS) {
                         if (game.state.time > SUBMARINE_TIME_BEFORE_LVL_3) {
                             level = 3;
-                        } else if (game.state.time > SUBMARINE_TIME_BEFORE_LVL_3) {
+                        } else if (game.state.time > SUBMARINE_TIME_BEFORE_LVL_2) {
                             level = 2;
                         } else {
                             level = 1;
@@ -346,7 +346,7 @@ var EVENT_ICON = {
                     x = ~~(player.x + dist * Math.cos(angle));
                     y = ~~(player.y + dist * Math.sin(angle));
                     cell = screen.getEntity('entity_cell', 'cell_' + ~~(x * 10 / (MAP_LIMITS)) + '_' + ~~(y * 10 / (MAP_LIMITS)));
-                    if (cell) {
+                    if (cell && x > 0 && x < MAP_LIMITS && y > 0 && y < MAP_LIMITS) {
                         ttl = ~~(1 + Math.random() * (MAX_TTL - MIN_TTL + 1)) + MIN_TTL;
                         event = EVENTS_UPGRADE[~~(Math.random() * EVENTS_UPGRADE.length)];
                         m = ~~((game.state.time + ttl) % 216000 / 3600);
