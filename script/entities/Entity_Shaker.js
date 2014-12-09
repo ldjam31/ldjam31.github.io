@@ -38,7 +38,7 @@
             newIntensity: null,
             newTTL: null
         })
-        .onUpdate(function(e,s,game) {
+        .onUpdate(function(e,screen,game) {
             if (this.newIntensity !== null && this.newTTL !== null) {
                 if (this.intensity < this.newIntensity || this.ttl <= 0) {
                     this.intensity = this.newIntensity;
@@ -51,6 +51,7 @@
             this.newTTL = null;
             
             if (this.ttl > 0) {
+                screen.getEntity('entity_compass', 'compass').sprite.rotation = 0;
                 if (this.movementTTL <= 0) {
                     game.camera.x = ~~((Math.random() * 2 - 1) * this.intensity * (this.ttl / this.initialTTL));
                     game.camera.y = ~~((Math.random() * 2 - 1) * this.intensity * (this.ttl / this.initialTTL));
