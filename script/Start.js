@@ -22,13 +22,11 @@
  * SOFTWARE.
  */
 
-var FX_VOLUME = 0/*.9*/;
-var MUSIC_VOLUME = 0/*.8*/;
-var REFILL_VOLUME = 0/*.5*/;
-var SONAR_VOLUME = 0/*.15*/;
-var BONUS_VOLUME = 0/*.4*/;
-// var FX_VOLUME = 0;
-// var MUSIC_VOLUME = 0;
+var FX_VOLUME = 0.9;
+var MUSIC_VOLUME = 0.8;
+var REFILL_VOLUME = 0.5;
+var SONAR_VOLUME = 0.15;
+var BONUS_VOLUME = 0.4;
 
 var INITIAL_ARMOUR = 100;
 var ARMOUR_MAX = 100;
