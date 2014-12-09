@@ -53,6 +53,45 @@ var EVENT_ICON = {
         'upgrade_radarRange',
         'upgrade_radarFrequence'
     ];
+    
+    var EVENTS_SCRIPT = {
+        welcome: [
+            {
+                text: 'bla',
+                time: 60
+            },
+            {
+                text: 'bla',
+                time: 60
+            },
+            {
+                text: 'bla',
+                time: 60
+            },
+            {
+                text: 'bla',
+                time: 60
+            }
+        ],
+        gameOver: [
+            {
+                text: 'bla',
+                time: 60
+            },
+            {
+                text: 'bla',
+                time: 60
+            },
+            {
+                text: 'bla',
+                time: 60
+            },
+            {
+                text: 'bla',
+                time: 60
+            }
+        ]
+    }
 
     var MIN_EVENTS_UPGRADE_CD = 7200;
     var MAX_EVENTS_UPGRADE_CD = 8000;
@@ -82,15 +121,31 @@ var EVENT_ICON = {
             textColdDown: MIN_EVENTS_TEXT_CD,
             itemColdDown: 1,
             submarineColdDown: MIN_EVENTS_SUBMARINE_CD,
-            upgradeColdDown: MIN_EVENTS_UPGRADE_CD
+            upgradeColdDown: MIN_EVENTS_UPGRADE_CD,
+            currentScript: null,
+            currentScriptIndex: 0,
+            scriptSequenceTTL: 0
         })
         .onUpdate(function (e, screen, game) {
             var logger, event, player, cell, dist, angle, x, y, m, s, ttl, value, level;
 
+            logger = screen.getEntity('entity_log', 'log');
 
-            if (this.itemColdDown <= 0) {
+            if (this.currentScript) {
+                if (this.scriptSequenceTTL === 0) {
+                    logger.module('module_logUpdater').logsBuffer.push(EVENTS_SCRIPT[this.currentScript][this.currentScriptIndex].text);
+                    this.scriptSequenceTTL = EVENTS_SCRIPT[this.currentScript][this.currentScriptIndex].time;
+                    this.currentScriptIndex ++;
+                    if (this.currentScriptIndex === EVENTS_SCRIPT[this.currentScript].length) {
+                        this.currentScriptIndex = 0;
+                        this.currentScript = null;
+                    }
+                } else {
+                    this.scriptSequenceTTL --;
+                }
+            } else {
+                if (this.itemColdDown <= 0) {
                 player = screen.getEntity('entity_player', 'player');
-                logger = screen.getEntity('entity_log', 'log');
                 if (player && logger) {
                     dist = ~~(1 + Math.random() * (MAX_SPAWN_DIST - MIN_SPAWN_DIST + 1)) + MIN_SPAWN_DIST;
                     angle = Math.random() * Math.PI * 2;
@@ -212,6 +267,7 @@ var EVENT_ICON = {
             } else {
                 this.textColdDown--;
             }
+            }
 
         })
 
@@ -219,7 +275,8 @@ var EVENT_ICON = {
         .modules([
             'module_eventsManagerUpdater'
         ])
-        .onCreate(function () {
+        .onCreate(function (args,screen) {
             this.id = 'eventsManager';
+            this.module('module_eventsManagerUpdater').currentScript = 'welcome';
         })
 })()

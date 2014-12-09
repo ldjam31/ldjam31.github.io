@@ -29,10 +29,66 @@
     var MAX_MINES_PER_CELL = 1;
     var CELL_SIZE = MAP_LIMITS / 10;
 
+    game.Module.define('module_mapUpdater')
+        .data({
+            reinit: false
+        })
+        .onUpdate(function(entity, screen) {
+            if (this.reinit) {
+                var i, j, k, entitiesToPut, cell, originX, originY, nodeCell, nodeElem;
+
+
+                nodeCell = entity.firstChildNode;
+                    while (nodeCell) {
+                        nodeElem = nodeCell.o.firstChildNode;
+                        while (nodeElem) {
+                            screen.removeEntity(nodeElem.o);
+                            nodeElem = nodeElem.next;
+                        }
+                        nodeCell = nodeCell.next;
+                    }
+                
+                
+                //Dispatch mines and rocks on map
+                for (i = 0; i < 10; ++i) {
+                    for (j = 0; j < 10; ++j) {
+                        originX = CELL_SIZE * i;
+                        originY = CELL_SIZE * j;
+
+                        cell = entity.child('cell_' + i + '_' + j);
+
+                        if ((i === 4 || i === 5) && (j===4 || j === 5)) {
+                            continue;
+                        }
+
+                        entitiesToPut = ~~(1 + Math.random() * (MAX_ROCKS_PER_CELL - MIN_ROCKS_PER_CELL)) + MIN_ROCKS_PER_CELL;
+                        for (k = 0; k < entitiesToPut; ++k) {
+                            cell.addChild('entity_rock', {
+                                x: originX + ~~(Math.random() * CELL_SIZE),
+                                y: originY + ~~(Math.random() * CELL_SIZE)
+                            })
+                        }
+
+                        entitiesToPut = ~~(1 + Math.random() * (MAX_MINES_PER_CELL - MIN_MINES_PER_CELL)) + MIN_MINES_PER_CELL;
+                        for (k = 0; k < entitiesToPut; ++k) {
+                            cell.addChild('entity_mine', {
+                                x: originX + ~~(Math.random() * CELL_SIZE),
+                                y: originY + ~~(Math.random() * CELL_SIZE)
+                            })
+                        }
+
+                    }
+                }
+            }
+        })
+        
     game.Entity.define('entity_map')
+        .updateAnyways()
+        .modules([
+            'module_mapUpdater'
+        ])
         .onCreate(function () {
             var i, j, k, entitiesToPut, cell, originX, originY;
-
 
             this.id = 'map';
 

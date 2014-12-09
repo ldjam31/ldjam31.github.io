@@ -30,6 +30,21 @@ var BONUS_VOLUME = 0.4;
 // var FX_VOLUME = 0;
 // var MUSIC_VOLUME = 0;
 
+var INITIAL_ARMOUR = 100;
+var ARMOUR_MAX = 100;
+var INITIAL_FUEL = 100;
+var FUEL_MAX = 100;
+var INITIAL_O2 = 100;
+var O2_MAX = 100;
+var INITIAL_AMMO = 3;
+var AMMO_MAX = 5;
+var ROCKET_DAMAGES = 15;
+var ROCKET_SPEED = 0.1;
+var ROCKET_RELOAD = 300;
+var RADAR_FREQUENCE = 90;
+var RADAR_RANGE = 120;
+
+
 !(function () {
     var assets = [
         {type: Cassava.Assets.IMAGE, name: 'hud', src: './assets/img/Board.png'},
@@ -56,21 +71,6 @@ var BONUS_VOLUME = 0.4;
         {type: Cassava.Assets.AUDIO, name: 'torpedo', src: './assets/snd/Torpedo.wav'},
         {type: Cassava.Assets.AUDIO, name: 'air', src: './assets/snd/Air.wav'}
     ];
-
-
-    var INITIAL_ARMOUR = 100;
-    var ARMOUR_MAX = 100;
-    var INITIAL_FUEL = 100;
-    var FUEL_MAX = 100;
-    var INITIAL_O2 = 100;
-    var O2_MAX = 100;
-    var INITIAL_AMMO = 3;
-    var AMMO_MAX = 5;
-    var ROCKET_DAMAGES = 15;
-    var ROCKET_SPEED = 0.1;
-    var ROCKET_RELOAD = 300;
-    var RADAR_FREQUENCE = 90;
-    var RADAR_RANGE = 120;
 
     game.initialState({
         ammo: INITIAL_AMMO,
